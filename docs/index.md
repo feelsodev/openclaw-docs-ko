@@ -4,21 +4,6 @@ title: "OpenClaw"
 
 # 오픈클로 🦞
 
-<p align="center">
-    <img
-        src="https://docs.openclaw.ai/assets/openclaw-logo-text-dark.png"
-        alt="OpenClaw"
-        width="500"
-        class="dark:hidden"
-    />
-    <img
-        src="https://docs.openclaw.ai/assets/openclaw-logo-text.png"
-        alt="OpenClaw"
-        width="500"
-        class="hidden dark:block"
-    />
-</p>
-
 > _"탈출! 각질 제거!"_ — 아마도 우주 랍스터일 겁니다.
 
 <p align="center">
