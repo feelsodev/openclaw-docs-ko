@@ -1,0 +1,112 @@
+name: Sync Upstream Docs
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  check-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check upstream docs for changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          HASH_FILE=".upstream-hash"
+          UPSTREAM_REPO="openclaw/openclaw"
+          DOCS_PATH="docs"
+
+          LATEST_HASH=$(gh api "repos/${UPSTREAM_REPO}/commits?path=${DOCS_PATH}&per_page=1" --jq '.[0].sha // empty')
+
+          if [ -z "$LATEST_HASH" ]; then
+            echo "Failed to fetch upstream commit hash"
+            exit 0
+          fi
+
+          STORED_HASH=""
+          if [ -f "$HASH_FILE" ]; then
+            STORED_HASH=$(cat "$HASH_FILE")
+          fi
+
+          if [ "$LATEST_HASH" = "$STORED_HASH" ]; then
+            echo "No changes detected"
+            exit 0
+          fi
+
+          echo "Changes detected! Latest: $LATEST_HASH, Stored: $STORED_HASH"
+
+          if [ -z "$STORED_HASH" ]; then
+            COMPARE_URL="https://github.com/${UPSTREAM_REPO}/commits/main/${DOCS_PATH}"
+            CHANGED_FILES="(최초 동기화 - 전체 확인 필요)"
+          else
+            CHANGED_FILES=$(gh api "repos/${UPSTREAM_REPO}/compare/${STORED_HASH}...${LATEST_HASH}" \
+              --jq '[.files[] | select(.filename | startswith("docs/")) | .filename] | join("\n")' 2>/dev/null || echo "(비교 실패 - 수동 확인 필요)")
+            COMPARE_URL="https://github.com/${UPSTREAM_REPO}/compare/${STORED_HASH}...${LATEST_HASH}"
+          fi
+
+          COMMIT_MSG=$(gh api "repos/${UPSTREAM_REPO}/commits/${LATEST_HASH}" --jq '.commit.message' 2>/dev/null | head -1 || echo "")
+          COMMIT_DATE=$(gh api "repos/${UPSTREAM_REPO}/commits/${LATEST_HASH}" --jq '.commit.committer.date' 2>/dev/null || echo "")
+
+          EXISTING=$(gh issue list --label "upstream-sync" --state open --json number --jq '.[0].number // empty')
+
+          BODY=$(cat <<'ISSUE_BODY'
+          ## 원본 문서 업데이트 감지
+
+          **upstream 커밋**: \`LATEST_HASH_PLACEHOLDER\`
+          **커밋 메시지**: COMMIT_MSG_PLACEHOLDER
+          **날짜**: COMMIT_DATE_PLACEHOLDER
+
+          ### 변경된 파일
+          ```
+          CHANGED_FILES_PLACEHOLDER
+          ```
+
+          ### 비교 링크
+          COMPARE_URL_PLACEHOLDER
+
+          ### 작업 순서
+          1. 위 변경된 파일 목록 확인
+          2. 해당 파일의 영문 원본 확인 (`docs/` 경로)
+          3. 한국어 번역 업데이트 (`docs/` 내 대응 파일)
+          4. PR 생성 후 merge
+
+          ---
+          *이 이슈는 자동으로 생성되었습니다.*
+          ISSUE_BODY
+          )
+
+          BODY="${BODY//LATEST_HASH_PLACEHOLDER/$LATEST_HASH}"
+          BODY="${BODY//COMMIT_MSG_PLACEHOLDER/$COMMIT_MSG}"
+          BODY="${BODY//COMMIT_DATE_PLACEHOLDER/$COMMIT_DATE}"
+          BODY="${BODY//CHANGED_FILES_PLACEHOLDER/$CHANGED_FILES}"
+          BODY="${BODY//COMPARE_URL_PLACEHOLDER/$COMPARE_URL}"
+
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+            echo "Updated existing issue #$EXISTING"
+          else
+            gh issue create \
+              --title "[동기화] upstream 문서 업데이트 감지 ($(date +%Y-%m-%d))" \
+              --body "$BODY" \
+              --label "upstream-sync"
+            echo "Created new sync issue"
+          fi
+
+          echo "$LATEST_HASH" > "$HASH_FILE"
+
+      - name: Commit hash update
+        run: |
+          if [ -f ".upstream-hash" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .upstream-hash
+            git diff --staged --quiet || git commit -m "chore: update upstream hash"
+            git push || echo "Push failed - may need permissions"
+          fi

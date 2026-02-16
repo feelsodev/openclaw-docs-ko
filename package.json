@@ -1,0 +1,16 @@
+{
+  "name": "openclaw-docs-ko",
+  "version": "1.0.0",
+  "description": "OpenClaw 한국어 문서 (비공식 커뮤니티 번역)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.28"
+  }
+}
