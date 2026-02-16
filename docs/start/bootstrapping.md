@@ -1,7 +1,7 @@
 ---
 title: "Agent Bootstrapping"
-sidebarTitle: "Bootstrapping"
 ---
+
 # 에이전트 부트스트래핑
 
 부트스트래핑은 상담원 작업 영역을 준비하고
@@ -24,12 +24,12 @@ sidebarTitle: "Bootstrapping"
 원격 게이트웨이, 작업 공간 및 부트스트래핑 파일은 해당 원격에 있습니다.
 기계.
 
-
 ::: info
+
 게이트웨이가 다른 시스템에서 실행되면 게이트웨이에서 작업공간 파일을 편집합니다.
 호스트(예: `user@gateway-host:~/.openclaw/workspace`).
-:::
 
+:::
 
 ## 관련 문서
 

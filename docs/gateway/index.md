@@ -1,22 +1,24 @@
 ---
 title: "Gateway Runbook"
 ---
+
 # 게이트웨이 런북
 
 게이트웨이 서비스의 1일차 시작 및 2일차 작업에 이 페이지를 사용하세요.
 
-
-  - [**Deep troubleshooting**](/gateway/troubleshooting) - 정확한 명령 래더 및 로그 서명을 통한 증상 우선 진단.
-
-  - [**Configuration**](/gateway/configuration) - 작업 중심 설정 가이드 + 전체 구성 참조.
-
+<CardGroup :cols="2">
+  <Card title="Deep troubleshooting" icon="siren" href="/gateway/troubleshooting">
+    정확한 명령 래더 및 로그 서명을 통한 증상 우선 진단.
+  </Card>
+  <Card title="Configuration" icon="sliders" href="/gateway/configuration">
+    작업 중심 설정 가이드 + 전체 구성 참조.
+  </Card>
+</CardGroup>
 
 ## 5분 로컬 시작
 
-
-**Step 1: Start the Gateway**
-
-
+::::steps
+:::step{title="Start the Gateway"}
 ```bash
 openclaw gateway --port 18789
 # debug/trace mirrored to stdio
@@ -24,34 +26,29 @@ openclaw gateway --port 18789 --verbose
 # force-kill listener on selected port, then start
 openclaw gateway --force
 ```
-
-
-**Step 2: Verify service health**
-
-
+:::
+:::step{title="Verify service health"}
 ```bash
 openclaw gateway status
 openclaw status
 openclaw logs --follow
 ```
 
-
 정상 기준: `Runtime: running` 및 `RPC probe: ok`.
-
-
-**Step 3: Validate channel readiness**
-
-
+:::
+:::step{title="Validate channel readiness"}
 ```bash
 openclaw channels status --probe
 ```
-
+:::
+::::
 
 ::: info
+
 게이트웨이 구성 다시 로드는 활성 구성 파일 경로를 감시합니다(프로필/상태 기본값 또는 설정 시 `OPENCLAW_CONFIG_PATH`에서 확인됨).
 기본 모드는 `gateway.reload.mode="hybrid"`입니다.
-:::
 
+:::
 
 ## 런타임 모델
 
@@ -103,11 +100,11 @@ ssh -N -L 18789:127.0.0.1:18789 user@host
 
 그런 다음 클라이언트를 `ws://127.0.0.1:18789`에 로컬로 연결합니다.
 
-
 ::: warning
-게이트웨이 인증이 구성된 경우 클라이언트는 SSH 터널을 통해서도 인증(`token`/`password`)을 계속 보내야 합니다.
-:::
 
+게이트웨이 인증이 구성된 경우 클라이언트는 SSH 터널을 통해서도 인증(`token`/`password`)을 계속 보내야 합니다.
+
+:::
 
 참조: [원격 게이트웨이](/gateway/remote), [인증](/gateway/authentication), [Tailscale](/gateway/tailscale).
 
@@ -115,10 +112,8 @@ ssh -N -L 18789:127.0.0.1:18789 user@host
 
 프로덕션과 유사한 안정성을 위해 감독 실행을 사용합니다.
 
-
-#### macOS (launchd)
-
-
+::::tabs
+:::tab{title="macOS (launchd)"}
 ```bash
 openclaw gateway install
 openclaw gateway status
@@ -126,42 +121,30 @@ openclaw gateway restart
 openclaw gateway stop
 ```
 
-
-LaunchAgent 레이블은 `ai.openclaw.gateway`(기본값) 또는 `ai.openclaw.&lt;profile&gt;`(명명된 프로필)입니다. `openclaw doctor`는 서비스 구성 드리프트를 감사하고 복구합니다.
-
-
----
-
-#### Linux (systemd user)
-
-
+LaunchAgent 레이블은 `ai.openclaw.gateway`(기본값) 또는 `ai.openclaw.<profile>`(명명된 프로필)입니다. `openclaw doctor`는 서비스 구성 드리프트를 감사하고 복구합니다.
+:::
+:::tab{title="Linux (systemd user)"}
 ```bash
 openclaw gateway install
-systemctl --user enable --now openclaw-gateway[-<profile>].service
+systemctl --user enable --now openclaw-gateway[-&lt;profile&gt;].service
 openclaw gateway status
 ```
 
-
 로그아웃 후에도 지속성을 유지하려면 느린 시간을 활성화하세요.
 
-
 ```bash
-sudo loginctl enable-linger <user>
+sudo loginctl enable-linger &lt;user&gt;
 ```
-
-
----
-
-#### Linux (system service)
-
+:::
+:::tab{title="Linux (system service)"}
 다중 사용자/상시 접속 호스트를 위한 시스템 장치를 사용합니다.
-
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable --now openclaw-gateway[-<profile>].service
+sudo systemctl enable --now openclaw-gateway[-&lt;profile&gt;].service
 ```
-
+:::
+::::
 
 ## 하나의 호스트에 여러 게이트웨이
 

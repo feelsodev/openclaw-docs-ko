@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { installMintContainers } from './theme/markdown-tabs'
 
 export default defineConfig({
   title: 'OpenClaw 한국어 문서',
@@ -6,7 +7,7 @@ export default defineConfig({
   lang: 'ko-KR',
 
   head: [
-    ['link', { rel: 'icon', href: '/assets/pixel-lobster.svg' }],
+    ['link', { rel: 'icon', href: '/openclaw-docs-ko/assets/pixel-lobster.svg' }],
     ['meta', { name: 'theme-color', content: '#FF5A36' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'ko_KR' }],
@@ -37,6 +38,43 @@ export default defineConfig({
     ],
 
     sidebar: {
+      '/': [
+        {
+          text: '홈',
+          items: [
+            { text: 'OpenClaw', link: '/' },
+          ]
+        },
+        {
+          text: '개요',
+          items: [
+            { text: '쇼케이스', link: '/start/showcase' },
+          ]
+        },
+        {
+          text: '핵심 개념',
+          items: [
+            { text: '기능', link: '/concepts/features' },
+          ]
+        },
+        {
+          text: '시작하기',
+          items: [
+            { text: '시작 가이드', link: '/start/getting-started' },
+            { text: '온보딩 개요', link: '/start/onboarding-overview' },
+            { text: '설정 마법사', link: '/start/wizard' },
+            { text: '온보딩', link: '/start/onboarding' },
+          ]
+        },
+        {
+          text: '가이드',
+          items: [
+            { text: 'OpenClaw 소개', link: '/start/openclaw' },
+            { text: '부트스트래핑', link: '/start/bootstrapping' },
+          ]
+        },
+      ],
+
       '/start/': [
         {
           text: '홈',
@@ -507,6 +545,12 @@ export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
   ignoreDeadLinks: true,
+
+  markdown: {
+    config: (md) => {
+      installMintContainers(md)
+    },
+  },
 
   sitemap: {
     hostname: 'https://feelsodev.github.io/openclaw-docs-ko',

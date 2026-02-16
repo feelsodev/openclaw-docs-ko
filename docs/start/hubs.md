@@ -1,13 +1,14 @@
 ---
 title: "Docs Hubs"
 ---
+
 # 문서 허브
 
-
 ::: info
-OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부터 시작하세요.
-:::
 
+OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부터 시작하세요.
+
+:::
 
 이 허브를 사용하여 왼쪽 탐색 메뉴에 표시되지 않는 심층 분석 및 참조 문서를 포함한 모든 페이지를 검색하세요.
 
@@ -20,7 +21,7 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 - [마법사](/start/wizard)
 - [설정](/start/setup)
 - [대시보드(로컬 게이트웨이)](http://127.0.0.1:18789/)
-- [도움말](/help/)
+- [도움말](/help)
 - [문서 디렉토리](/start/docs-directory)
 - [구성](/gateway/configuration)
 - [구성예](/gateway/configuration-examples)
@@ -67,7 +68,7 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 
 ## 공급자 + 수신
 
-- [채팅 채널 허브](/channels/)
+- [채팅 채널 허브](/channels)
 - [모델 제공자 허브](/providers/models)
 - [WhatsApp](/channels/whatsapp)
 - [텔레그램](/channels/telegram)
@@ -85,7 +86,7 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 
 ## 게이트웨이 + 작업
 
-- [게이트웨이 런북](/gateway/)
+- [게이트웨이 런북](/gateway)
 - [네트워크 모델](/gateway/network-model)
 - [게이트웨이 페어링](/gateway/pairing)
 - [게이트웨이 잠금](/gateway/gateway-lock)
@@ -100,14 +101,14 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 - [원격 접속](/gateway/remote)
 - [원격 게이트웨이 읽어보기](/gateway/remote-gateway-readme)
 - [꼬리비늘](/gateway/tailscale)
-- [보안](/gateway/security/)
+- [보안](/gateway/security)
 - [문제 해결](/gateway/troubleshooting)
 
 ## 도구 + 자동화
 
-- [도구 표면](/tools/)
+- [도구 표면](/tools)
 - [OpenProse](/prose)
-- [CLI 참조](/cli/)
+- [CLI 참조](/cli)
 - [실행 도구](/tools/exec)
 - [승격 모드](/tools/elevated)
 - [크론 작업](/automation/cron-jobs)
@@ -123,7 +124,7 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 
 ## 노드, 미디어, 음성
 
-- [노드 개요](/nodes/)
+- [노드 개요](/nodes)
 - [카메라](/nodes/camera)
 - [이미지](/nodes/images)
 - [오디오](/nodes/audio)
@@ -133,13 +134,13 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 
 ## 플랫폼
 
-- [플랫폼 개요](/platforms/)
+- [플랫폼 개요](/platforms)
 - [macOS](/platforms/macos)
 - [iOS](/platforms/ios)
 - [안드로이드](/platforms/android)
 - [윈도우(WSL2)](/platforms/windows)
 - [리눅스](/platforms/linux)
-- [웹 표면](/web/)
+- [웹 표면](/web)
 
 ## macOS 동반 앱(고급)
 
@@ -168,7 +169,7 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 - [ClawHub](/tools/clawhub)
 - [스킬 구성](/tools/skills-config)
 - [기본 에이전트](/reference/AGENTS.default)
-- [템플릿: AGENTS](/reference/AGENTS.default)
+- [템플릿: AGENTS](/reference/templates/AGENTS)
 - [템플릿: BOOTSTRAP](/reference/templates/BOOTSTRAP)
 - [템플릿: HEARTBEAT](/reference/templates/HEARTBEAT)
 - [템플릿: IDENTITY](/reference/templates/IDENTITY)

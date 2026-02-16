@@ -1,6 +1,7 @@
 ---
 title: "Sub-Agents"
 ---
+
 # 하위 에이전트
 
 하위 에이전트를 사용하면 기본 대화를 차단하지 않고 백그라운드 작업을 실행할 수 있습니다. 하위 에이전트를 생성하면 자체 격리된 세션에서 실행되고 작업을 수행하며 완료되면 결과를 다시 채팅에 알립니다.
@@ -25,31 +26,26 @@ title: "Sub-Agents"
 
 ## 작동 방식
 
-
-**Step 1: Main agent spawns**
-
-  주 에이전트는 작업 설명과 함께 `sessions_spawn`를 호출합니다. 통화는 **비차단**입니다. 주 상담원이 `{ status: "accepted", runId, childSessionKey }` 즉시 응답합니다.
-
-
-**Step 2: Sub-agent runs in the background**
-
-  전용 `subagent` 대기열 레인에 새로운 격리 세션(`agent:&lt;agentId&gt;:subagent:&lt;uuid&gt;`)이 생성됩니다.
-
-
-**Step 3: Result is announced**
-
-  하위 에이전트가 완료되면 결과를 요청자 채팅에 다시 알립니다. 주체는 자연어 요약을 게시합니다.
-
-
-**Step 4: Session is archived**
-
-  하위 에이전트 세션은 60분 후에 자동으로 보관됩니다(구성 가능). 성적표는 보존됩니다.
-
+::::steps
+:::step{title="Main agent spawns"}
+주 에이전트는 작업 설명과 함께 `sessions_spawn`를 호출합니다. 통화는 **비차단**입니다. 주 상담원이 `{ status: "accepted", runId, childSessionKey }` 즉시 응답합니다.
+:::
+:::step{title="Sub-agent runs in the background"}
+전용 `subagent` 대기열 레인에 새로운 격리 세션(`agent:<agentId>:subagent:<uuid>`)이 생성됩니다.
+:::
+:::step{title="Result is announced"}
+하위 에이전트가 완료되면 결과를 요청자 채팅에 다시 알립니다. 주체는 자연어 요약을 게시합니다.
+:::
+:::step{title="Session is archived"}
+하위 에이전트 세션은 60분 후에 자동으로 보관됩니다(구성 가능). 성적표는 보존됩니다.
+:::
+::::
 
 ::: tip
-각 하위 에이전트에는 **자체** 컨텍스트와 토큰 사용법이 있습니다. 비용 절감을 위해 하위 에이전트에 대해 더 저렴한 모델을 설정하세요. 아래의 [기본 모델 설정](#setting-a-default-model)을 참조하세요.
-:::
 
+각 하위 에이전트에는 **자체** 컨텍스트와 토큰 사용법이 있습니다. 비용 절감을 위해 하위 에이전트에 대해 더 저렴한 모델을 설정하세요. 아래의 [기본 모델 설정](#setting-a-default-model)을 참조하세요.
+
+:::
 
 ## 구성
 
@@ -149,11 +145,11 @@ title: "Sub-Agents"
 }
 ```
 
-
 ::: info
-아카이브는 기록의 이름을 `*.deleted.&lt;timestamp&gt;`(동일 폴더)로 변경합니다. 기록은 삭제되지 않고 보존됩니다. 자동 보관 타이머는 최선의 노력입니다. 게이트웨이가 다시 시작되면 보류 중인 타이머가 손실됩니다.
-:::
 
+아카이브는 기록의 이름을 `*.deleted.<timestamp>`(동일 폴더)로 변경합니다. 기록은 삭제되지 않고 보존됩니다. 자동 보관 타이머는 최선의 노력입니다. 게이트웨이가 다시 시작되면 보류 중인 타이머가 손실됩니다.
+
+:::
 
 ## `sessions_spawn` 도구
 
@@ -187,11 +183,11 @@ title: "Sub-Agents"
 3. 전역 기본값 : `agents.defaults.subagents.thinking`
 4. 그렇지 않으면 하위 에이전트별 사고 무시가 적용되지 않습니다.
 
-
 ::: info
-잘못된 모델 값은 자동으로 건너뜁니다. 하위 에이전트는 도구 결과에 경고가 표시되면서 다음으로 유효한 기본값으로 실행됩니다.
-:::
 
+잘못된 모델 값은 자동으로 건너뜁니다. 하위 에이전트는 도구 결과에 경고가 표시되면서 다음으로 유효한 기본값으로 실행됩니다.
+
+:::
 
 ### 교차 에이전트 생성
 
@@ -212,11 +208,11 @@ title: "Sub-Agents"
 }
 ```
 
-
 ::: tip
-`agents_list` 도구를 사용하여 현재 `sessions_spawn`에 허용되는 에이전트 ID를 알아보세요.
-:::
 
+`agents_list` 도구를 사용하여 현재 `sessions_spawn`에 허용되는 에이전트 ID를 알아보세요.
+
+:::
 
 ## 하위 에이전트 관리 (`/subagents`)
 
@@ -225,43 +221,41 @@ title: "Sub-Agents"
 | 명령                                     | 설명                                       |
 | ---------------------------------------- | ------------------------------------------ |
 | `/subagents list`                        | 모든 하위 에이전트 실행 나열(활성 및 완료) |
-| `/subagents stop &lt;id\|#\|all&gt;`           | 실행 중인 하위 에이전트 중지               |
-| `/subagents log &lt;id\|#&gt; [limit] [tools]` | 하위 에이전트 기록 보기                    |
-| `/subagents info &lt;id\|#&gt;`                | 자세한 실행 메타데이터 표시                |
-| `/subagents send &lt;id\|#&gt; &lt;message&gt;`      | 실행 중인 하위 에이전트에 메시지 보내기    |
+| `/subagents stop <id\|#\|all>`           | 실행 중인 하위 에이전트 중지               |
+| `/subagents log <id\|#> [limit] [tools]` | 하위 에이전트 기록 보기                    |
+| `/subagents info <id\|#>`                | 자세한 실행 메타데이터 표시                |
+| `/subagents send <id\|#> <message>`      | 실행 중인 하위 에이전트에 메시지 보내기    |
 
 목록 인덱스(`1`, `2`), 실행 ID 접두사, 전체 세션 키 또는 `last`를 기준으로 하위 에이전트를 참조할 수 있습니다.
 
-
-::: details Example: list and stop a sub-agent
-  <pre v-pre><code>
+::::accordion-group
+:::accordion{title="Example: list and stop a sub-agent"}
+```
 /subagents list
-  </code></pre>
+```
 
-  <pre v-pre><code>
+```
 🧭 Subagents (current session)
 Active: 1 · Done: 2
 1) ✅ · research logs · 2m31s · run a1b2c3d4 · agent:main:subagent:...
 2) ✅ · check deps · 45s · run e5f6g7h8 · agent:main:subagent:...
 3) 🔄 · deploy staging · 1m12s · run i9j0k1l2 · agent:main:subagent:...
-  </code></pre>
+```
 
-  <pre v-pre><code>
+```
 /subagents stop 3
-  </code></pre>
+```
 
-  <pre v-pre><code>
+```
 ⚙️ Stop requested for deploy staging.
-  </code></pre>
+```
 :::
-
-
-::: details Example: inspect a sub-agent
-  <pre v-pre><code>
+:::accordion{title="Example: inspect a sub-agent"}
+```
 /subagents info 1
-  </code></pre>
+```
 
-  <pre v-pre><code>
+```
 ℹ️ Subagent info
 Status: ✅
 Label: research logs
@@ -271,31 +265,27 @@ Session: agent:main:subagent:...
 Runtime: 2m31s
 Cleanup: keep
 Outcome: ok
-  </code></pre>
+```
 :::
-
-
-::: details Example: view sub-agent log
-  <pre v-pre><code>
+:::accordion{title="Example: view sub-agent log"}
+```
 /subagents log 1 10
-  </code></pre>
+```
 
-  하위 에이전트의 기록에서 마지막 10개 메시지를 표시합니다. 도구 호출 메시지를 포함하려면 `tools`를 추가하세요.
+하위 에이전트의 기록에서 마지막 10개 메시지를 표시합니다. 도구 호출 메시지를 포함하려면 `tools`를 추가하세요.
 
-  <pre v-pre><code>
+```
 /subagents log 1 10 tools
-  </code></pre>
+```
 :::
+:::accordion{title="Example: send a follow-up message"}
+```
+/subagents send 3 "Also check the staging environment"
+```
 
-
-::: details Example: send a follow-up message
-  <pre v-pre><code>
-/subagents send 3 &quot;Also check the staging environment&quot;
-  </code></pre>
-
-  실행 중인 하위 에이전트의 세션에 메시지를 보내고 최대 30초 동안 응답을 기다립니다.
+실행 중인 하위 에이전트의 세션에 메시지를 보내고 최대 30초 동안 응답을 기다립니다.
 :::
-
+::::
 
 ## 발표(결과가 어떻게 나오는지)
 
@@ -325,34 +315,34 @@ Outcome: ok
 - **시간 초과** — 작업이 초과되었습니다 `runTimeoutSeconds`
 - **알 수 없음** — 상태를 확인할 수 없습니다.
 
-
 ::: tip
+
 사용자에게 표시되는 알림이 필요하지 않은 경우 주 에이전트 요약 단계는 `NO_REPLY`를 반환할 수 있으며 아무것도 게시되지 않습니다.
 이는 에이전트 간 공지 흐름(`sessions_send`)에서 사용되는 `ANNOUNCE_SKIP`와 다릅니다.
-:::
 
+:::
 
 ## 도구 정책
 
 기본적으로 하위 에이전트는 백그라운드 작업에 안전하지 않거나 불필요한 거부된 도구 세트를 제외한 **모든 도구**를 가져옵니다.
 
-
-::: details Default denied tools
-  | 거부된 도구 | 이유 |
-  |-------------|---------|
-  | `sessions_list` | 세션 관리 — 주 에이전트가 조정 |
-  | `sessions_history` | 세션 관리 — 주 에이전트가 조정 |
-  | `sessions_send` | 세션 관리 — 주 에이전트가 조정 |
-  | `sessions_spawn` | 중첩된 팬아웃 없음(하위 에이전트는 하위 에이전트를 생성할 수 없음) |
-  | `gateway` | 시스템 관리자 - 하위 에이전트로 인해 위험함 |
-  | `agents_list` | 시스템 관리자 |
-  | `whatsapp_login` | 대화형 설정 - 작업이 아님 |
-  | `session_status` | 상태/스케줄 - 주요 에이전트 좌표 |
-  | `cron` | 상태/스케줄 - 주요 에이전트 좌표 |
-  | `memory_search` | 대신 생성 프롬프트에 관련 정보를 전달 |
-  | `memory_get` | 대신 생성 프롬프트에 관련 정보를 전달 |
+::::accordion-group
+:::accordion{title="Default denied tools"}
+| 거부된 도구 | 이유 |
+|-------------|---------|
+| `sessions_list` | 세션 관리 — 주 에이전트가 조정 |
+| `sessions_history` | 세션 관리 — 주 에이전트가 조정 |
+| `sessions_send` | 세션 관리 — 주 에이전트가 조정 |
+| `sessions_spawn` | 중첩된 팬아웃 없음(하위 에이전트는 하위 에이전트를 생성할 수 없음) |
+| `gateway` | 시스템 관리자 - 하위 에이전트로 인해 위험함 |
+| `agents_list` | 시스템 관리자 |
+| `whatsapp_login` | 대화형 설정 - 작업이 아님 |
+| `session_status` | 상태/스케줄 - 주요 에이전트 좌표 |
+| `cron` | 상태/스케줄 - 주요 에이전트 좌표 |
+| `memory_search` | 대신 생성 프롬프트에 관련 정보를 전달 |
+| `memory_get` | 대신 생성 프롬프트에 관련 정보를 전달 |
 :::
-
+::::
 
 ### 하위 에이전트 도구 사용자 정의
 
@@ -386,11 +376,11 @@ Outcome: ok
 }
 ```
 
-
 ::: info
-사용자 정의 거부 항목이 기본 거부 목록에 **추가**됩니다. `allow`가 설정된 경우 해당 도구만 사용할 수 있습니다(기본 거부 목록은 여전히 ​​맨 위에 적용됩니다).
-:::
 
+사용자 정의 거부 항목이 기본 거부 목록에 **추가**됩니다. `allow`가 설정된 경우 해당 도구만 사용할 수 있습니다(기본 거부 목록은 여전히 ​​맨 위에 적용됩니다).
+
+:::
 
 ## 인증
 
@@ -400,11 +390,11 @@ Outcome: ok
 - 기본 에이전트의 인증 프로필이 **대체**로 병합됩니다(충돌 시 에이전트 프로필이 승리함).
 - 병합은 추가됩니다. 기본 프로필은 항상 대체 항목으로 사용 가능합니다.
 
-
 ::: info
-하위 에이전트별로 완전히 격리된 인증은 현재 지원되지 않습니다.
-:::
 
+하위 에이전트별로 완전히 격리된 인증은 현재 지원되지 않습니다.
+
+:::
 
 ## 컨텍스트 및 시스템 프롬프트
 
@@ -420,19 +410,18 @@ Outcome: ok
 | 방법                   | 효과                                                                        |
 | ---------------------- | --------------------------------------------------------------------------- |
 | `/stop` 채팅           | 기본 세션 **및** 여기에서 생성된 모든 활성 하위 에이전트 실행을 중단합니다. |
-| `/subagents stop &lt;id&gt;` | 기본 세션에 영향을 주지 않고 특정 하위 에이전트를 중지합니다.               |
+| `/subagents stop <id>` | 기본 세션에 영향을 주지 않고 특정 하위 에이전트를 중지합니다.               |
 | `runTimeoutSeconds`    | 지정된 시간 이후 하위 에이전트 실행을 자동으로 중단                         |
 
-
 ::: info
-`runTimeoutSeconds`는 세션을 자동 보관하지 **않습니다**. 세션은 일반 보관 타이머가 실행될 때까지 유지됩니다.
-:::
 
+`runTimeoutSeconds`는 세션을 자동 보관하지 **않습니다**. 세션은 일반 보관 타이머가 실행될 때까지 유지됩니다.
+
+:::
 
 ## 전체 구성 예
 
-
-::: details Complete sub-agent configuration
+:::accordion{title="Complete sub-agent configuration"}
 ```json5
 {
   agents: {
@@ -472,17 +461,16 @@ Outcome: ok
 ```
 :::
 
-
 ## 제한사항
 
-
 ::: warning
+
 - **최선의 알림:** 게이트웨이가 다시 시작되면 보류 중인 알림 작업이 손실됩니다.
 - **중첩 생성 없음:** 하위 에이전트는 자체 하위 에이전트를 생성할 수 없습니다.
 - **공유 리소스:** 하위 에이전트는 게이트웨이 프로세스를 공유합니다. `maxConcurrent`를 안전 밸브로 사용하세요.
 - **자동 보관이 최선입니다.** 대기 중인 보관 타이머는 게이트웨이를 다시 시작하면 손실됩니다.
-:::
 
+:::
 
 ## 참고 항목
 

@@ -1,16 +1,16 @@
 ---
 title: "CLI Automation"
-sidebarTitle: "CLI automation"
 ---
+
 # CLI 자동화
 
 `--non-interactive`을 사용하여 `openclaw onboard`를 자동화하세요.
 
-
 ::: info
-`--json`는 비대화형 모드를 의미하지 않습니다. 스크립트에는 `--non-interactive`(및 `--workspace`)를 사용하세요.
-:::
 
+`--json`는 비대화형 모드를 의미하지 않습니다. 스크립트에는 `--non-interactive`(및 `--workspace`)를 사용하세요.
+
+:::
 
 ## 기본 비대화형 예
 
@@ -30,8 +30,8 @@ openclaw onboard --non-interactive \
 
 ## 제공자별 예시
 
-
-::: details Gemini example
+::::accordion-group
+:::accordion{title="Gemini example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -39,12 +39,9 @@ openclaw onboard --non-interactive \
   --gemini-api-key "$GEMINI_API_KEY" \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 :::
-
-
-::: details Z.AI example
+:::accordion{title="Z.AI example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -52,12 +49,9 @@ openclaw onboard --non-interactive \
   --zai-api-key "$ZAI_API_KEY" \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 :::
-
-
-::: details Vercel AI Gateway example
+:::accordion{title="Vercel AI Gateway example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -65,12 +59,9 @@ openclaw onboard --non-interactive \
   --ai-gateway-api-key "$AI_GATEWAY_API_KEY" \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 :::
-
-
-::: details Cloudflare AI Gateway example
+:::accordion{title="Cloudflare AI Gateway example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -80,12 +71,9 @@ openclaw onboard --non-interactive \
   --cloudflare-ai-gateway-api-key "$CLOUDFLARE_AI_GATEWAY_API_KEY" \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 :::
-
-
-::: details Moonshot example
+:::accordion{title="Moonshot example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -93,12 +81,9 @@ openclaw onboard --non-interactive \
   --moonshot-api-key "$MOONSHOT_API_KEY" \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 :::
-
-
-::: details Synthetic example
+:::accordion{title="Synthetic example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -106,12 +91,9 @@ openclaw onboard --non-interactive \
   --synthetic-api-key "$SYNTHETIC_API_KEY" \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 :::
-
-
-::: details OpenCode Zen example
+:::accordion{title="OpenCode Zen example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -119,12 +101,9 @@ openclaw onboard --non-interactive \
   --opencode-zen-api-key "$OPENCODE_API_KEY" \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 :::
-
-
-::: details Custom provider example
+:::accordion{title="Custom provider example"}
 ```bash
 openclaw onboard --non-interactive \
   --mode local \
@@ -136,17 +115,15 @@ openclaw onboard --non-interactive \
   --custom-compatibility anthropic \
   --gateway-port 18789 \
   --gateway-bind loopback
-
 ```
 
-
-  `--custom-api-key`는 선택 사항입니다. 생략하면 온보딩에서 `CUSTOM_API_KEY`를 확인합니다.
+`--custom-api-key`는 선택 사항입니다. 생략하면 온보딩에서 `CUSTOM_API_KEY`를 확인합니다.
 :::
-
+::::
 
 ## 다른 상담원 추가
 
-`openclaw agents add &lt;name&gt;`를 사용하여 자체 작업공간이 있는 별도의 에이전트를 생성하고,
+`openclaw agents add <name>`를 사용하여 자체 작업공간이 있는 별도의 에이전트를 생성하고,
 세션 및 인증 프로필. `--workspace` 없이 실행하면 마법사가 시작됩니다.
 
 ```bash
@@ -166,7 +143,7 @@ openclaw agents add work \
 
 참고:
 
-- 기본 작업공간은 `~/.openclaw/workspace-&lt;agentId&gt;`를 따릅니다.
+- 기본 작업공간은 `~/.openclaw/workspace-<agentId>`를 따릅니다.
 - `bindings`를 추가하여 인바운드 메시지를 라우팅합니다(마법사가 이를 수행할 수 있음).
 - 비대화형 플래그: `--model`, `--agent-dir`, `--bind`, `--non-interactive`.
 

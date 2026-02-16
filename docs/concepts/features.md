@@ -1,21 +1,29 @@
 ---
 title: "Features"
 ---
+
 ## 하이라이트
 
-
-  - **Channels** - 단일 게이트웨이를 사용하는 WhatsApp, Telegram, Discord 및 iMessage.
-
-  - **Plugins** - 확장 기능을 사용하여 Mattermost 등을 추가하세요.
-
-  - **Routing** - 격리된 세션을 사용한 다중 에이전트 라우팅.
-
-  - **Media** - 이미지, 오디오, 문서가 들어오고 나가고 있습니다.
-
-  - **Apps and UI** - 웹 컨트롤 UI 및 macOS 동반 앱.
-
-  - **Mobile nodes** - Canvas를 지원하는 iOS 및 Android 노드.
-
+<Columns>
+  <Card title="Channels" icon="message-square">
+    단일 게이트웨이를 사용하는 WhatsApp, Telegram, Discord 및 iMessage.
+  </Card>
+  <Card title="Plugins" icon="plug">
+    확장 기능을 사용하여 Mattermost 등을 추가하세요.
+  </Card>
+  <Card title="Routing" icon="route">
+    격리된 세션을 사용한 다중 에이전트 라우팅.
+  </Card>
+  <Card title="Media" icon="image">
+    이미지, 오디오, 문서가 들어오고 나가고 있습니다.
+  </Card>
+  <Card title="Apps and UI" icon="monitor">
+    웹 컨트롤 UI 및 macOS 동반 앱.
+  </Card>
+  <Card title="Mobile nodes" icon="smartphone">
+    Canvas를 지원하는 iOS 및 Android 노드.
+  </Card>
+</Columns>
 
 ## 전체 목록
 
@@ -36,9 +44,9 @@ title: "Features"
 - 페어링 및 캔버스 표면을 갖춘 iOS 노드
 - 페어링, 캔버스, 채팅, 카메라가 포함된 Android 노드
 
-
 ::: info
+
 레거시 Claude, Codex, Gemini 및 Opencode 경로가 제거되었습니다. 파이는 유일한
 코딩 에이전트 경로.
-:::
 
+:::

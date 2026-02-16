@@ -1,17 +1,18 @@
 ---
 title: "OpenClaw"
 ---
+
 # 오픈클로 🦞
 
 <p align="center">
     <img
-        src="/assets/openclaw-logo-text-dark.png"
+        src="https://docs.openclaw.ai/assets/openclaw-logo-text-dark.png"
         alt="OpenClaw"
         width="500"
         class="dark:hidden"
     />
     <img
-        src="/assets/openclaw-logo-text.png"
+        src="https://docs.openclaw.ai/assets/openclaw-logo-text.png"
         alt="OpenClaw"
         width="500"
         class="hidden dark:block"
@@ -21,17 +22,21 @@ title: "OpenClaw"
 > _"탈출! 각질 제거!"_ — 아마도 우주 랍스터일 겁니다.
 
 <p align="center">
-  <strong>WhatsApp, Telegram, Discord, iMessage 등의 AI 에이전트를 위한 모든 OS 게이트웨이.</strong><br/>
+  <strong>WhatsApp, Telegram, Discord, iMessage 등의 AI 에이전트를 위한 모든 OS 게이트웨이.</strong><br />
   메시지를 보내고 주머니에서 상담원의 응답을 받으세요. 플러그인은 Mattermost 등을 추가합니다.
 </p>
 
-
-  - [**Get Started**](/start/getting-started) - OpenClaw를 설치하고 몇 분 안에 게이트웨이를 가동하세요.
-
-  - [**Run the Wizard**](/start/wizard) - `openclaw onboard` 및 페어링 흐름을 사용한 설정 안내.
-
-  - [**Open the Control UI**](/web/control-ui) - 채팅, 구성 및 세션을 위한 브라우저 대시보드를 실행합니다.
-
+<Columns>
+  <Card title="Get Started" href="/start/getting-started" icon="rocket">
+    OpenClaw를 설치하고 몇 분 안에 게이트웨이를 가동하세요.
+  </Card>
+  <Card title="Run the Wizard" href="/start/wizard" icon="sparkles">
+    `openclaw onboard` 및 페어링 흐름을 사용한 설정 안내.
+  </Card>
+  <Card title="Open the Control UI" href="/web/control-ui" icon="layout-dashboard">
+    채팅, 구성 및 세션을 위한 브라우저 대시보드를 실행합니다.
+  </Card>
+</Columns>
 
 ## 오픈클로란 무엇인가요?
 
@@ -64,50 +69,47 @@ flowchart LR
 
 ## 주요 기능
 
-
-  - **Multi-channel gateway** - 단일 게이트웨이 프로세스를 사용하는 WhatsApp, Telegram, Discord 및 iMessage.
-
-  - **Plugin channels** - 확장 패키지로 Mattermost 등을 추가하세요.
-
-  - **Multi-agent routing** - 에이전트, 작업 영역 또는 발신자별로 격리된 세션입니다.
-
-  - **Media support** - 이미지, 오디오, 문서를 보내고 받습니다.
-
-  - **Web Control UI** - 채팅, 구성, 세션 및 노드를 위한 브라우저 대시보드입니다.
-
-  - **Mobile nodes** - iOS 및 Android 노드를 Canvas 지원과 페어링합니다.
-
+<Columns>
+  <Card title="Multi-channel gateway" icon="network">
+    단일 게이트웨이 프로세스를 사용하는 WhatsApp, Telegram, Discord 및 iMessage.
+  </Card>
+  <Card title="Plugin channels" icon="plug">
+    확장 패키지로 Mattermost 등을 추가하세요.
+  </Card>
+  <Card title="Multi-agent routing" icon="route">
+    에이전트, 작업 영역 또는 발신자별로 격리된 세션입니다.
+  </Card>
+  <Card title="Media support" icon="image">
+    이미지, 오디오, 문서를 보내고 받습니다.
+  </Card>
+  <Card title="Web Control UI" icon="monitor">
+    채팅, 구성, 세션 및 노드를 위한 브라우저 대시보드입니다.
+  </Card>
+  <Card title="Mobile nodes" icon="smartphone">
+    iOS 및 Android 노드를 Canvas 지원과 페어링합니다.
+  </Card>
+</Columns>
 
 ## 빠른 시작
 
-
-**Step 1: Install OpenClaw**
-
-
+::::steps
+:::step{title="Install OpenClaw"}
 ```bash
 npm install -g openclaw@latest
-
 ```
-
-
-**Step 2: Onboard and install the service**
-
-
+:::
+:::step{title="Onboard and install the service"}
 ```bash
 openclaw onboard --install-daemon
-
 ```
-
-
-**Step 3: Pair WhatsApp and start the Gateway**
-
-
+:::
+:::step{title="Pair WhatsApp and start the Gateway"}
 ```bash
 openclaw channels login
 openclaw gateway --port 18789
-
 ```
-
+:::
+::::
 
 전체 설치 및 개발 설정이 필요합니까? [빠른 시작](/start/quickstart)을 참조하세요.
 
@@ -116,10 +118,10 @@ openclaw gateway --port 18789
 게이트웨이가 시작된 후 브라우저 제어 UI를 엽니다.
 
 - 로컬 기본값: [http://127.0.0.1:18789/](http://127.0.0.1:18789/)
-- 원격 접속: [웹 표면](/web/) 및 [Tailscale](/gateway/tailscale)
+- 원격 접속: [웹 표면](/web) 및 [Tailscale](/gateway/tailscale)
 
 <p align="center">
-  <img src="/assets/openclaw-logo-text.png" alt="OpenClaw" width="420" />
+  <img src="https://docs.openclaw.ai/assets/whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
 </p>
 
 ## 구성(선택 사항)
@@ -145,30 +147,43 @@ openclaw gateway --port 18789
 
 ## 여기서 시작하세요
 
-
-  - [**Docs hubs**](/start/hubs) - 모든 문서와 가이드는 사용 사례별로 정리되어 있습니다.
-
-  - [**Configuration**](/gateway/configuration) - 핵심 게이트웨이 설정, 토큰 및 공급자 구성.
-
-  - [**Remote access**](/gateway/remote) - SSH 및 tailnet 액세스 패턴.
-
-  - [**Channels**](/channels/telegram) - WhatsApp, Telegram, Discord 등에 대한 채널별 설정입니다.
-
-  - [**Nodes**](/nodes/) - 페어링 및 Canvas가 포함된 iOS 및 Android 노드.
-
-  - [**Help**](/help/) - 일반적인 수정 사항 및 문제 해결 진입점.
-
+<Columns>
+  <Card title="Docs hubs" href="/start/hubs" icon="book-open">
+    모든 문서와 가이드는 사용 사례별로 정리되어 있습니다.
+  </Card>
+  <Card title="Configuration" href="/gateway/configuration" icon="settings">
+    핵심 게이트웨이 설정, 토큰 및 공급자 구성.
+  </Card>
+  <Card title="Remote access" href="/gateway/remote" icon="globe">
+    SSH 및 tailnet 액세스 패턴.
+  </Card>
+  <Card title="Channels" href="/channels/telegram" icon="message-square">
+    WhatsApp, Telegram, Discord 등에 대한 채널별 설정입니다.
+  </Card>
+  <Card title="Nodes" href="/nodes" icon="smartphone">
+    페어링 및 Canvas가 포함된 iOS 및 Android 노드.
+  </Card>
+  <Card title="Help" href="/help" icon="life-buoy">
+    일반적인 수정 사항 및 문제 해결 진입점.
+  </Card>
+</Columns>
 
 ## 자세히 알아보기
 
-
-  - [**Full feature list**](/concepts/features) - 완전한 채널, 라우팅 및 미디어 기능.
-
-  - [**Multi-agent routing**](/concepts/multi-agent) - 작업 공간 격리 및 에이전트별 세션.
-
-  - [**Security**](/gateway/security/) - 토큰, 허용 목록 및 안전 제어.
-
-  - [**Troubleshooting**](/gateway/troubleshooting) - 게이트웨이 진단 및 일반적인 오류.
-
-  - [**About and credits**](/reference/credits) - 프로젝트 출처, 기여자 및 라이선스.
-
+<Columns>
+  <Card title="Full feature list" href="/concepts/features" icon="list">
+    완전한 채널, 라우팅 및 미디어 기능.
+  </Card>
+  <Card title="Multi-agent routing" href="/concepts/multi-agent" icon="route">
+    작업 공간 격리 및 에이전트별 세션.
+  </Card>
+  <Card title="Security" href="/gateway/security" icon="shield">
+    토큰, 허용 목록 및 안전 제어.
+  </Card>
+  <Card title="Troubleshooting" href="/gateway/troubleshooting" icon="wrench">
+    게이트웨이 진단 및 일반적인 오류.
+  </Card>
+  <Card title="About and credits" href="/reference/credits" icon="info">
+    프로젝트 출처, 기여자 및 라이선스.
+  </Card>
+</Columns>

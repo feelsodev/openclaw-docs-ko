@@ -1,32 +1,33 @@
 ---
 title: "Discord"
 ---
+
 # 디스코드(봇 API)
 
 상태: 공식 Discord 게이트웨이를 통해 DM 및 길드 채널을 사용할 준비가 되었습니다.
 
-
-  - [**Pairing**](/channels/pairing) - Discord DM은 기본적으로 페어링 모드로 설정됩니다.
-
-  - [**Slash commands**](/tools/slash-commands) - 기본 명령 동작 및 명령 카탈로그.
-
-  - [**Channel troubleshooting**](/channels/troubleshooting) - 채널 간 진단 및 수리 흐름.
-
+<CardGroup :cols="3">
+  <Card title="Pairing" icon="link" href="/channels/pairing">
+    Discord DM은 기본적으로 페어링 모드로 설정됩니다.
+  </Card>
+  <Card title="Slash commands" icon="terminal" href="/tools/slash-commands">
+    기본 명령 동작 및 명령 카탈로그.
+  </Card>
+  <Card title="Channel troubleshooting" icon="wrench" href="/channels/troubleshooting">
+    채널 간 진단 및 수리 흐름.
+  </Card>
+</CardGroup>
 
 ## 빠른 설정
 
+::::steps
+:::step{title="Create a Discord bot and enable intents"}
+Discord 개발자 포털에서 애플리케이션을 생성하고 봇을 추가한 후 다음을 활성화하세요.
 
-**Step 1: Create a Discord bot and enable intents**
-
-  Discord 개발자 포털에서 애플리케이션을 생성하고 봇을 추가한 후 다음을 활성화하세요.
-
-  - **메시지 내용 의도**
-  - **서버 구성원 의도**(역할 허용 목록 및 역할 기반 라우팅에 필요, 이름-ID 허용 목록 일치에 권장)
-
-
-**Step 2: Configure token**
-
-
+- **메시지 내용 의도**
+- **서버 구성원 의도**(역할 허용 목록 및 역할 기반 라우팅에 필요, 이름-ID 허용 목록 일치에 권장)
+:::
+:::step{title="Configure token"}
 ```json5
 {
   channels: {
@@ -38,94 +39,81 @@ title: "Discord"
 }
 ```
 
-
-  기본 계정에 대한 환경 대체:
-
+    기본 계정에 대한 환경 대체:
 
 ```bash
 DISCORD_BOT_TOKEN=...
 ```
-
-
-**Step 3: Invite the bot and start gateway**
-
-  메시지 권한으로 봇을 서버에 초대하세요.
-
+:::
+:::step{title="Invite the bot and start gateway"}
+    메시지 권한으로 봇을 서버에 초대하세요.
 
 ```bash
 openclaw gateway
 ```
-
-
-**Step 4: Approve first DM pairing**
-
-
+:::
+:::step{title="Approve first DM pairing"}
 ```bash
 openclaw pairing list discord
-openclaw pairing approve discord <CODE>
+openclaw pairing approve discord &lt;CODE&gt;
 ```
 
-
-  페어링 코드는 1시간 후에 만료됩니다.
-
+    페어링 코드는 1시간 후에 만료됩니다.
+:::
+::::
 
 ::: info
-토큰 확인은 계정을 인식합니다. 구성 토큰 값은 환경 폴백보다 우선합니다. `DISCORD_BOT_TOKEN`는 기본 계정에만 사용됩니다.
-:::
 
+토큰 확인은 계정을 인식합니다. 구성 토큰 값은 환경 폴백보다 우선합니다. `DISCORD_BOT_TOKEN`는 기본 계정에만 사용됩니다.
+
+:::
 
 ## 런타임 모델
 
 - 게이트웨이는 Discord 연결을 소유합니다.
 - 회신 라우팅은 결정적입니다. Discord 인바운드는 Discord에 다시 응답합니다.
 - 기본적으로(`session.dmScope=main`) 직접 채팅은 에이전트 기본 세션(`agent:main:main`)을 공유합니다.
-- 길드 채널은 분리된 세션 키입니다(`agent:&lt;agentId&gt;:discord:channel:&lt;channelId&gt;`).
+- 길드 채널은 분리된 세션 키입니다(`agent:<agentId>:discord:channel:<channelId>`).
 - 그룹 DM은 기본적으로 무시됩니다(`channels.discord.dm.groupEnabled=false`).
-- 기본 슬래시 명령은 격리된 명령 세션(`agent:&lt;agentId&gt;:discord:slash:&lt;userId&gt;`)에서 실행되는 동시에 라우팅된 대화 세션에 `CommandTargetSessionKey`를 전달합니다.
+- 기본 슬래시 명령은 격리된 명령 세션(`agent:<agentId>:discord:slash:<userId>`)에서 실행되는 동시에 라우팅된 대화 세션에 `CommandTargetSessionKey`를 전달합니다.
 
 ## 액세스 제어 및 라우팅
 
+::::tabs
+:::tab{title="DM policy"}
+`channels.discord.dm.policy`는 DM 액세스를 제어합니다.
 
-#### DM policy
+- `pairing` (기본값)
+- `allowlist`
+- `open` (`"*"`를 포함하려면 `channels.discord.dm.allowFrom` 필요)
+- `disabled`
 
-  `channels.discord.dm.policy`는 DM 액세스를 제어합니다.
+DM 정책이 열려 있지 않으면 알 수 없는 사용자가 차단됩니다(또는 `pairing` 모드에서 페어링하라는 메시지가 표시됨).
 
-  - `pairing` (기본값)
-  - `allowlist`
-  - `open` (`"*"`를 포함하려면 `channels.discord.dm.allowFrom` 필요)
-  - `disabled`
+배송을 위한 DM 대상 형식:
 
-  DM 정책이 열려 있지 않으면 알 수 없는 사용자가 차단됩니다(또는 `pairing` 모드에서 페어링하라는 메시지가 표시됨).
+- `user:<id>`
+- `<@id>` 언급
 
-  배송을 위한 DM 대상 형식:
+명시적인 사용자/채널 대상 종류가 제공되지 않는 한 단순 숫자 ID는 모호하며 거부됩니다.
+:::
+:::tab{title="Guild policy"}
+    길드 처리는 `channels.discord.groupPolicy`에 의해 제어됩니다:
 
-  - `user:&lt;id&gt;`
-  - `&lt;@id&gt;` 언급
+    - `open`
+    - `allowlist`
+    - `disabled`
 
-  명시적인 사용자/채널 대상 종류가 제공되지 않는 한 단순 숫자 ID는 모호하며 거부됩니다.
+    `channels.discord`이 존재할 때의 보안 기준은 `allowlist`입니다.
 
+    `allowlist` 행동:
 
----
+    - 길드는 `channels.discord.guilds`와 일치해야 합니다(`id` 선호, 슬러그 허용).
+    - 선택적 발신자 허용 목록: `users`(ID 또는 이름) 및 `roles`(역할 ID만) 둘 중 하나가 구성된 경우 `users` 또는 `roles`와 일치하면 발신자가 허용됩니다.
+    - 길드에 `channels`가 설정되어 있는 경우 목록에 없는 채널은 거부됩니다.
+    - 길드에 `channels` 블록이 없으면 허용된 길드의 모든 채널이 허용됩니다.
 
-#### Guild policy
-
-  길드 처리는 `channels.discord.groupPolicy`에 의해 제어됩니다:
-
-  - `open`
-  - `allowlist`
-  - `disabled`
-
-  `channels.discord`이 존재할 때의 보안 기준은 `allowlist`입니다.
-
-  `allowlist` 행동:
-
-  - 길드는 `channels.discord.guilds`와 일치해야 합니다(`id` 선호, 슬러그 허용).
-  - 선택적 발신자 허용 목록: `users`(ID 또는 이름) 및 `roles`(역할 ID만) 둘 중 하나가 구성된 경우 `users` 또는 `roles`와 일치하면 발신자가 허용됩니다.
-  - 길드에 `channels`가 설정되어 있는 경우 목록에 없는 채널은 거부됩니다.
-  - 길드에 `channels` 블록이 없으면 허용된 길드의 모든 채널이 허용됩니다.
-
-  예:
-
+    예:
 
 ```json5
 {
@@ -148,29 +136,25 @@ openclaw pairing approve discord <CODE>
 }
 ```
 
-
 `DISCORD_BOT_TOKEN`만 설정하고 `channels.discord` 블록을 생성하지 않으면 런타임 폴백은 `groupPolicy="open"`입니다(로그에 경고 표시).
+:::
+:::tab{title="Mentions and group DMs"}
+길드 메시지는 기본적으로 멘션 게이트로 처리됩니다.
 
+멘션 감지에는 다음이 포함됩니다.
 
----
+- 명시적인 봇 언급
+- 구성된 멘션 패턴(`agents.list[].groupChat.mentionPatterns`, 대체 `messages.groupChat.mentionPatterns`)
+- 지원되는 경우 암시적인 봇에 대한 응답 동작
 
-#### Mentions and group DMs
+`requireMention`는 길드/채널별로 구성됩니다(`channels.discord.guilds...`).
 
-  길드 메시지는 기본적으로 멘션 게이트로 처리됩니다.
+그룹 DM:
 
-  멘션 감지에는 다음이 포함됩니다.
-
-  - 명시적인 봇 언급
-  - 구성된 멘션 패턴(`agents.list[].groupChat.mentionPatterns`, 대체 `messages.groupChat.mentionPatterns`)
-  - 지원되는 경우 암시적인 봇에 대한 응답 동작
-
-  `requireMention`는 길드/채널별로 구성됩니다(`channels.discord.guilds...`).
-
-  그룹 DM:
-
-  - 기본값: 무시됨 (`dm.groupEnabled=false`)
-  - `dm.groupChannels`를 통한 선택적 허용 목록(채널 ID 또는 슬러그)
-
+- 기본값: 무시됨 (`dm.groupEnabled=false`)
+- `dm.groupChannels`를 통한 선택적 허용 목록(채널 ID 또는 슬러그)
+:::
+::::
 
 ### 역할 기반 상담원 라우팅
 
@@ -200,52 +184,49 @@ openclaw pairing approve discord <CODE>
 
 ## 개발자 포털 설정
 
-
-::: details Create app and bot
-  1. Discord 개발자 포털 -> **애플리케이션** -> **새 애플리케이션**
-  2. **봇** -> **봇 추가**
-  3. 봇 토큰 복사
+::::accordion-group
+:::accordion{title="Create app and bot"}
+1. Discord 개발자 포털 -> **애플리케이션** -> **새 애플리케이션**
+2. **봇** -> **봇 추가**
+3. 봇 토큰 복사
 :::
 
+:::accordion{title="Privileged intents"}
+**Bot -> Privileged Gateway Intents**에서 다음을 활성화합니다.
 
-::: details Privileged intents
-  **Bot -> Privileged Gateway Intents**에서 다음을 활성화합니다.
+- 메시지 내용의 의도
+- 서버 구성원 의도(권장)
 
-  - 메시지 내용의 의도
-  - 서버 구성원 의도(권장)
-
-  현재 상태 의도는 선택 사항이며 현재 상태 업데이트를 받으려는 경우에만 필요합니다. 봇 존재 여부 설정(`setPresence`)에는 구성원에 대한 현재 상태 업데이트를 활성화할 필요가 없습니다.
+현재 상태 의도는 선택 사항이며 현재 상태 업데이트를 받으려는 경우에만 필요합니다. 봇 존재 여부 설정(`setPresence`)에는 구성원에 대한 현재 상태 업데이트를 활성화할 필요가 없습니다.
 :::
 
+:::accordion{title="OAuth scopes and baseline permissions"}
+OAuth URL 생성기:
 
-::: details OAuth scopes and baseline permissions
-  OAuth URL 생성기:
+- 범위: `bot`, `applications.commands`
 
-  - 범위: `bot`, `applications.commands`
+일반적인 기본 권한:
 
-  일반적인 기본 권한:
+- 채널 보기
+- 메시지 보내기
+- 메시지 기록 읽기
+- 링크 삽입
+- 파일 첨부
+- 반응 추가(선택 사항)
 
-  - 채널 보기
-  - 메시지 보내기
-  - 메시지 기록 읽기
-  - 링크 삽입
-  - 파일 첨부
-  - 반응 추가(선택 사항)
-
-  명시적으로 필요한 경우가 아니면 `Administrator`를 사용하지 마세요.
+명시적으로 필요한 경우가 아니면 `Administrator`를 사용하지 마세요.
 :::
 
+:::accordion{title="Copy IDs"}
+Discord 개발자 모드를 활성화한 후 다음을 복사하세요.
 
-::: details Copy IDs
-  Discord 개발자 모드를 활성화한 후 다음을 복사하세요.
+- 서버 ID
+- 채널 ID
+- 사용자 ID
 
-  - 서버 ID
-  - 채널 ID
-  - 사용자 ID
-
-  안정적인 감사 및 프로브를 위해 OpenClaw 구성에서 숫자 ID를 선호합니다.
+안정적인 감사 및 프로브를 위해 OpenClaw 구성에서 숫자 ID를 선호합니다.
 :::
-
+::::
 
 ## 기본 명령 및 명령 인증
 
@@ -259,64 +240,60 @@ openclaw pairing approve discord <CODE>
 
 ## 기능 세부정보
 
+::::accordion-group
+:::accordion{title="Reply tags and native replies"}
+Discord는 상담원 출력에서 응답 태그를 지원합니다.
 
-::: details Reply tags and native replies
-  Discord는 상담원 출력에서 응답 태그를 지원합니다.
+- `[[reply_to_current]]`
+- `[[reply_to:<id>]]`
 
-  - `[[reply_to_current]]`
-  - `[[reply_to:&lt;id&gt;]]`
+`channels.discord.replyToMode`에 의해 제어됨:
 
-  `channels.discord.replyToMode`에 의해 제어됨:
+- `off` (기본값)
+- `first`
+- `all`
 
-  - `off` (기본값)
-  - `first`
-  - `all`
-
-  메시지 ID는 컨텍스트/기록에 표시되므로 상담원이 특정 메시지를 타겟팅할 수 있습니다.
+메시지 ID는 컨텍스트/기록에 표시되므로 상담원이 특정 메시지를 타겟팅할 수 있습니다.
 :::
 
+:::accordion{title="History, context, and thread behavior"}
+길드 역사 내용:
 
-::: details History, context, and thread behavior
-  길드 역사 내용:
+- `channels.discord.historyLimit` 기본값 `20`
+- 대체: `messages.groupChat.historyLimit`
+- `0` 비활성화
 
-  - `channels.discord.historyLimit` 기본값 `20`
-  - 대체: `messages.groupChat.historyLimit`
-  - `0` 비활성화
+DM 기록 제어:
 
-  DM 기록 제어:
+- `channels.discord.dmHistoryLimit`
+- `channels.discord.dms["<user_id>"].historyLimit`
 
-  - `channels.discord.dmHistoryLimit`
-  - `channels.discord.dms["&lt;user_id&gt;"].historyLimit`
+스레드 동작:
 
-  스레드 동작:
+- Discord 스레드는 채널 세션으로 라우팅됩니다.
+- 상위 스레드 메타데이터는 상위 세션 연결에 사용될 수 있습니다.
+- 스레드 특정 항목이 존재하지 않는 한 스레드 구성은 상위 채널 구성을 상속합니다.
 
-  - Discord 스레드는 채널 세션으로 라우팅됩니다.
-  - 상위 스레드 메타데이터는 상위 세션 연결에 사용될 수 있습니다.
-  - 스레드 특정 항목이 존재하지 않는 한 스레드 구성은 상위 채널 구성을 상속합니다.
-
-  채널 주제는 **신뢰할 수 없는** 컨텍스트(시스템 프롬프트가 아님)로 삽입됩니다.
+채널 주제는 **신뢰할 수 없는** 컨텍스트(시스템 프롬프트가 아님)로 삽입됩니다.
 :::
 
+:::accordion{title="Reaction notifications"}
+길드별 반응 알림 모드:
 
-::: details Reaction notifications
-  길드별 반응 알림 모드:
+- `off`
+- `own` (기본값)
+- `all`
+- `allowlist` (`guilds.<id>.users` 사용)
 
-  - `off`
-  - `own` (기본값)
-  - `all`
-  - `allowlist` (`guilds.&lt;id&gt;.users` 사용)
-
-  반응 이벤트는 시스템 이벤트로 전환되어 라우팅된 Discord 세션에 첨부됩니다.
+반응 이벤트는 시스템 이벤트로 전환되어 라우팅된 Discord 세션에 첨부됩니다.
 :::
 
+:::accordion{title="Config writes"}
+    채널 시작 구성 쓰기는 기본적으로 활성화됩니다.
 
-::: details Config writes
-  채널 시작 구성 쓰기는 기본적으로 활성화됩니다.
+    이는 `/config set|unset` 흐름에 영향을 미칩니다(명령 기능이 활성화된 경우).
 
-  이는 `/config set|unset` 흐름에 영향을 미칩니다(명령 기능이 활성화된 경우).
-
-  비활성화:
-
+    비활성화:
 
 ```json5
 {
@@ -329,10 +306,8 @@ openclaw pairing approve discord <CODE>
 ```
 :::
 
-
-::: details PluralKit support
-  PluralKit 확인을 활성화하여 프록시 메시지를 시스템 구성원 ID에 매핑합니다.
-
+:::accordion{title="PluralKit support"}
+    PluralKit 확인을 활성화하여 프록시 메시지를 시스템 구성원 ID에 매핑합니다.
 
 ```json5
 {
@@ -347,30 +322,28 @@ openclaw pairing approve discord <CODE>
 }
 ```
 
+    참고:
 
-  참고:
-
-  - 허용 목록은 `pk:&lt;memberId&gt;`를 사용할 수 있습니다.
-  - 멤버 표시 이름은 이름/슬러그와 일치합니다.
-  - 조회는 원본 메시지 ID를 사용하며 기간이 제한되어 있습니다.
-  - 조회가 실패하면 프록시 메시지는 봇 메시지로 처리되어 `allowBots=true`가 아닌 이상 삭제됩니다.
+    - 허용 목록은 `pk:<memberId>`를 사용할 수 있습니다.
+    - 멤버 표시 이름은 이름/슬러그와 일치합니다.
+    - 조회는 원본 메시지 ID를 사용하며 기간이 제한되어 있습니다.
+    - 조회가 실패하면 프록시 메시지는 봇 메시지로 처리되어 `allowBots=true`가 아닌 이상 삭제됩니다.
 :::
 
+:::accordion{title="Exec approvals in Discord"}
+Discord는 DM에서 버튼 기반 실행 승인을 지원합니다.
 
-::: details Exec approvals in Discord
-  Discord는 DM에서 버튼 기반 실행 승인을 지원합니다.
+구성 경로:
 
-  구성 경로:
+- `channels.discord.execApprovals.enabled`
+- `channels.discord.execApprovals.approvers`
+- `agentFilter`, `sessionFilter`, `cleanupAfterResolve`
 
-  - `channels.discord.execApprovals.enabled`
-  - `channels.discord.execApprovals.approvers`
-  - `agentFilter`, `sessionFilter`, `cleanupAfterResolve`
+알 수 없는 승인 ID로 승인이 실패하는 경우 승인자 목록 및 기능 활성화를 확인하세요.
 
-  알 수 없는 승인 ID로 승인이 실패하는 경우 승인자 목록 및 기능 활성화를 확인하세요.
-
-  관련 문서: [실행 승인](/tools/exec-approvals)
+관련 문서: [실행 승인](/tools/exec-approvals)
 :::
-
+::::
 
 ## 도구 및 액션 게이트
 
@@ -396,22 +369,20 @@ Discord 메시지 작업에는 메시징, 채널 관리, 중재, 현재 상태 �
 
 ## 문제 해결
 
-
-::: details Used disallowed intents or bot sees no guild messages
-  - 메시지 콘텐츠 의도 활성화
-  - 사용자/멤버 해결에 의존하는 경우 서버 멤버 의도를 활성화합니다.
-  - 의도 변경 후 게이트웨이 다시 시작
+::::accordion-group
+:::accordion{title="Used disallowed intents or bot sees no guild messages"}
+- 메시지 콘텐츠 의도 활성화
+- 사용자/멤버 해결에 의존하는 경우 서버 멤버 의도를 활성화합니다.
+- 의도 변경 후 게이트웨이 다시 시작
 :::
 
+:::accordion{title="Guild messages blocked unexpectedly"}
+    - `groupPolicy` 확인
+    - `channels.discord.guilds`에서 길드 허용 목록을 확인하세요.
+    - 길드 `channels` 맵이 존재하는 경우, 나열된 채널만 허용됩니다.
+    - `requireMention` 행동 및 언급 패턴을 확인합니다.
 
-::: details Guild messages blocked unexpectedly
-  - `groupPolicy` 확인
-  - `channels.discord.guilds`에서 길드 허용 목록을 확인하세요.
-  - 길드 `channels` 맵이 존재하는 경우, 나열된 채널만 허용됩니다.
-  - `requireMention` 행동 및 언급 패턴을 확인합니다.
-
-  유용한 점검 사항:
-
+    유용한 점검 사항:
 
 ```bash
 openclaw doctor
@@ -420,36 +391,32 @@ openclaw logs --follow
 ```
 :::
 
+:::accordion{title="Require mention false but still blocked"}
+일반적인 원인:
 
-::: details Require mention false but still blocked
-  일반적인 원인:
-
-  - `groupPolicy="allowlist"` 길드/채널 허용 목록이 일치하지 않음
-  - `requireMention`가 잘못된 위치에 구성되었습니다(`channels.discord.guilds` 또는 채널 항목 아래에 있어야 함).
-  - 길드/채널 `users` 허용 목록에 의해 차단된 발신자
+- `groupPolicy="allowlist"` 길드/채널 허용 목록이 일치하지 않음
+- `requireMention`가 잘못된 위치에 구성되었습니다(`channels.discord.guilds` 또는 채널 항목 아래에 있어야 함).
+- 길드/채널 `users` 허용 목록에 의해 차단된 발신자
 :::
 
+:::accordion{title="Permissions audit mismatches"}
+`channels status --probe` 권한 확인은 숫자 채널 ID에 대해서만 작동합니다.
 
-::: details Permissions audit mismatches
-  `channels status --probe` 권한 확인은 숫자 채널 ID에 대해서만 작동합니다.
-
-  슬러그 키를 사용하는 경우 런타임 일치는 계속 작동할 수 있지만 프로브는 권한을 완전히 확인할 수 없습니다.
+슬러그 키를 사용하는 경우 런타임 일치는 계속 작동할 수 있지만 프로브는 권한을 완전히 확인할 수 없습니다.
 :::
 
-
-::: details DM and pairing issues
-  - DM 비활성화: `channels.discord.dm.enabled=false`
-  - DM 정책 비활성화: `channels.discord.dm.policy="disabled"`
-  - `pairing` 모드에서 페어링 승인 대기 중
+:::accordion{title="DM and pairing issues"}
+- DM 비활성화: `channels.discord.dm.enabled=false`
+- DM 정책 비활성화: `channels.discord.dm.policy="disabled"`
+- `pairing` 모드에서 페어링 승인 대기 중
 :::
 
+:::accordion{title="Bot to bot loops"}
+기본적으로 봇이 작성한 메시지는 무시됩니다.
 
-::: details Bot to bot loops
-  기본적으로 봇이 작성한 메시지는 무시됩니다.
-
-  `channels.discord.allowBots=true`를 설정한 경우 루프 동작을 방지하려면 엄격한 멘션 및 허용 목록 규칙을 사용하세요.
+`channels.discord.allowBots=true`를 설정한 경우 루프 동작을 방지하려면 엄격한 멘션 및 허용 목록 규칙을 사용하세요.
 :::
-
+::::
 
 ## 구성 참조 포인터
 

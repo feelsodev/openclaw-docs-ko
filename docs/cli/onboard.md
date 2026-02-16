@@ -1,6 +1,7 @@
 ---
 title: "onboard"
 ---
+
 # `openclaw onboard`
 
 대화형 온보딩 마법사(로컬 또는 원격 게이트웨이 설정)
@@ -67,8 +68,8 @@ openclaw configure
 openclaw agents add <name>
 ```
 
-
 ::: info
-`--json`는 비대화형 모드를 의미하지 않습니다. 스크립트에는 `--non-interactive`를 사용하세요.
-:::
 
+`--json`는 비대화형 모드를 의미하지 않습니다. 스크립트에는 `--non-interactive`를 사용하세요.
+
+:::

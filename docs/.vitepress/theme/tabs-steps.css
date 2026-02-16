@@ -1,0 +1,17 @@
+.mint-tab-panel {
+  display: none;
+}
+
+.mint-tab-panel.active {
+  display: block;
+}
+
+.mint-accordion > summary {
+  margin: 0;
+}
+
+.mint-accordion > :not(summary) {
+  padding: 0 16px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}

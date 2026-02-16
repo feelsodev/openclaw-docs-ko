@@ -1,7 +1,7 @@
 ---
 title: "Configuration Reference"
-description: "Complete field-by-field reference for ~/.openclaw/openclaw.json"
 ---
+
 # 구성 참조
 
 `~/.openclaw/openclaw.json`에서 모든 필드를 사용할 수 있습니다. 작업 중심 개요는 [구성](/gateway/configuration)을 참조하세요.
@@ -31,13 +31,13 @@ description: "Complete field-by-field reference for ~/.openclaw/openclaw.json"
 | `open`               | 그룹 허용 목록 우회(멘션 게이팅이 계속 적용됨) |
 | `disabled`           | 모든 그룹/방 메시지 차단                       |
 
-
 ::: info
+
 `channels.defaults.groupPolicy`는 공급자의 `groupPolicy`가 설정되지 않은 경우 기본값을 설정합니다.
 페어링 코드는 1시간 후에 만료됩니다. 보류 중인 DM 페어링 요청은 **채널당 3**으로 제한됩니다.
 Slack/Discord에는 특별한 대체 기능이 있습니다. 해당 제공자 섹션이 완전히 누락된 경우 런타임 그룹 정책은 `open`(시작 경고와 함께)로 해결될 수 있습니다.
-:::
 
+:::
 
 ### 왓츠앱
 
@@ -74,8 +74,7 @@ WhatsApp은 게이트웨이의 웹 채널(Baileys Web)을 통해 실행됩니다
 }
 ```
 
-
-::: details Multi-account WhatsApp
+:::accordion{title="Multi-account WhatsApp"}
 ```json5
 {
   channels: {
@@ -92,12 +91,10 @@ WhatsApp은 게이트웨이의 웹 채널(Baileys Web)을 통해 실행됩니다
 }
 ```
 
-
-  - 아웃바운드 명령이 있는 경우 기본적으로 `default` 계정으로 설정됩니다. 그렇지 않으면 처음 구성된 계정 ID(정렬됨)입니다.
-  - 레거시 단일 계정 Baileys 인증 디렉토리는 `openclaw doctor`에 의해 `whatsapp/default`로 마이그레이션되었습니다.
-  - 계정별 재정의: `channels.whatsapp.accounts.&lt;id&gt;.sendReadReceipts`.
+    - 아웃바운드 명령이 있는 경우 기본적으로 `default` 계정으로 설정됩니다. 그렇지 않으면 처음 구성된 계정 ID(정렬됨)입니다.
+    - 레거시 단일 계정 Baileys 인증 디렉토리는 `openclaw doctor`에 의해 `whatsapp/default`로 마이그레이션되었습니다.
+    - 계정별 재정의: `channels.whatsapp.accounts.<id>.sendReadReceipts`.
 :::
-
 
 ### 텔레그램
 
@@ -229,12 +226,12 @@ WhatsApp은 게이트웨이의 웹 채널(Baileys Web)을 통해 실행됩니다
 ```
 
 - 토큰: `channels.discord.token`, 기본 계정에 대한 대체 수단으로 `DISCORD_BOT_TOKEN` 포함.
-- 배송 대상은 `user:&lt;id&gt;`(DM) 또는 `channel:&lt;id&gt;`(길드 채널)을 사용하세요. 단순한 숫자 ID는 거부됩니다.
+- 배송 대상은 `user:<id>`(DM) 또는 `channel:<id>`(길드 채널)을 사용하세요. 단순한 숫자 ID는 거부됩니다.
 - 길드 슬러그는 소문자이며 공백은 `-`로 대체됩니다. 채널 키는 슬러그 이름을 사용합니다(`#` 없음). 길드 ID를 선호합니다.
 - 봇이 작성한 메시지는 기본적으로 무시됩니다. `allowBots: true` 이를 활성화합니다(자신의 메시지는 여전히 필터링됨).
 - `maxLinesPerMessage` (기본값 17)은 2000자 미만인 경우에도 긴 메시지를 분할합니다.
 
-**반응 알림 모드:** `off` (없음), `own` (봇의 메시지, 기본값), `all` (모든 메시지), `allowlist` (모든 메시지에서 `guilds.&lt;id&gt;.users`).
+**반응 알림 모드:** `off` (없음), `own` (봇의 메시지, 기본값), `all` (모든 메시지), `allowlist` (모든 메시지에서 `guilds.<id>.users`).
 
 ### Google 채팅
 
@@ -267,7 +264,7 @@ WhatsApp은 게이트웨이의 웹 채널(Baileys Web)을 통해 실행됩니다
 
 - 서비스 계정 JSON: 인라인(`serviceAccount`) 또는 파일 기반(`serviceAccountFile`).
 - 환경 대체: `GOOGLE_CHAT_SERVICE_ACCOUNT` 또는 `GOOGLE_CHAT_SERVICE_ACCOUNT_FILE`.
-- 배송 대상은 `spaces/&lt;spaceId&gt;` 또는 `users/&lt;userId|email&gt;`를 사용하세요.
+- 배송 대상은 `spaces/<spaceId>` 또는 `users/<userId|email>`를 사용하세요.
 
 ### 슬랙
 
@@ -329,7 +326,7 @@ WhatsApp은 게이트웨이의 웹 채널(Baileys Web)을 통해 실행됩니다
 - **소켓 모드**에는 기본 계정 환경 대체를 위해 `botToken` 및 `appToken` (`SLACK_BOT_TOKEN` + `SLACK_APP_TOKEN`가 모두 필요합니다.)
 - **HTTP 모드**에는 `botToken`와 `signingSecret`가 필요합니다(루트 또는 계정별).
 - `configWrites: false`는 Slack에서 시작한 구성 쓰기를 차단합니다.
-- 배송 대상은 `user:&lt;id&gt;`(DM) 또는 `channel:&lt;id&gt;`를 사용하세요.
+- 배송 대상은 `user:<id>`(DM) 또는 `channel:<id>`를 사용하세요.
 
 **반응 알림 모드:** `off`, `own` (기본값), `all`, `allowlist` (`reactionAllowlist`에서).
 
@@ -407,17 +404,15 @@ OpenClaw는 `imsg rpc`(stdio를 통한 JSON-RPC)를 생성합니다. 데몬이�
 ```
 
 - 메시지 DB에 대한 전체 디스크 액세스가 필요합니다.
-- `chat_id:&lt;id&gt;` 대상을 선호합니다. `imsg chats --limit 20`를 사용하여 채팅 목록을 표시하세요.
+- `chat_id:<id>` 대상을 선호합니다. `imsg chats --limit 20`를 사용하여 채팅 목록을 표시하세요.
 - `cliPath`는 SSH 래퍼를 가리킬 수 있습니다. SCP 첨부 파일 가져오기를 위해 `remoteHost`를 설정합니다.
 
-
-::: details iMessage SSH wrapper example
+:::accordion{title="iMessage SSH wrapper example"}
 ```bash
 #!/usr/bin/env bash
 exec ssh -T gateway-host imsg "$@"
 ```
 :::
-
 
 ### 다중 계정(모든 채널)
 
@@ -468,7 +463,7 @@ exec ssh -T gateway-host imsg "$@"
 }
 ```
 
-`messages.groupChat.historyLimit`는 전역 기본값을 설정합니다. 채널은 `channels.&lt;channel&gt;.historyLimit`(또는 계정별)로 재정의할 수 있습니다. 비활성화하려면 `0`를 설정하세요.
+`messages.groupChat.historyLimit`는 전역 기본값을 설정합니다. 채널은 `channels.<channel>.historyLimit`(또는 계정별)로 재정의할 수 있습니다. 비활성화하려면 `0`를 설정하세요.
 
 #### DM 기록 제한
 
@@ -533,19 +528,17 @@ exec ssh -T gateway-host imsg "$@"
 }
 ```
 
-
-::: details Command details
-  - 텍스트 명령은 `/`로 시작하는 **독립형** 메시지여야 합니다.
-  - `native: "auto"`는 Discord/Telegram에 대한 기본 명령을 활성화하고 Slack은 비활성화합니다.
-  - 채널별 재정의: `channels.discord.commands.native` (bool 또는 `"auto"`). `false` 이전에 등록된 명령을 삭제합니다.
-  - `channels.telegram.customCommands`는 텔레그램 봇 메뉴 항목을 추가합니다.
-  - `bash: true`는 호스트 쉘에 대해 `! &lt;cmd&gt;`를 활성화합니다. `tools.elevated.enabled`와 `tools.elevated.allowFrom.&lt;channel&gt;`의 발신자가 필요합니다.
-  - `config: true`는 `/config`를 활성화합니다(`openclaw.json` 읽기/쓰기).
-  - `channels.&lt;provider&gt;.configWrites` 채널당 게이트 구성 돌연변이를 지정합니다(기본값: true).
-  - `allowFrom`는 공급자별입니다. 설정되면 **유일한** 인증 소스입니다(채널 허용 목록/페어링 및 `useAccessGroups`는 무시됩니다).
-  - `useAccessGroups: false`는 `allowFrom`가 설정되지 않은 경우 명령이 액세스 그룹 정책을 우회하도록 허용합니다.
+:::accordion{title="Command details"}
+- 텍스트 명령은 `/`로 시작하는 **독립형** 메시지여야 합니다.
+- `native: "auto"`는 Discord/Telegram에 대한 기본 명령을 활성화하고 Slack은 비활성화합니다.
+- 채널별 재정의: `channels.discord.commands.native` (bool 또는 `"auto"`). `false` 이전에 등록된 명령을 삭제합니다.
+- `channels.telegram.customCommands`는 텔레그램 봇 메뉴 항목을 추가합니다.
+- `bash: true`는 호스트 쉘에 대해 `! <cmd>`를 활성화합니다. `tools.elevated.enabled`와 `tools.elevated.allowFrom.<channel>`의 발신자가 필요합니다.
+- `config: true`는 `/config`를 활성화합니다(`openclaw.json` 읽기/쓰기).
+- `channels.<provider>.configWrites` 채널당 게이트 구성 돌연변이를 지정합니다(기본값: true).
+- `allowFrom`는 공급자별입니다. 설정되면 **유일한** 인증 소스입니다(채널 허용 목록/페어링 및 `useAccessGroups`는 무시됩니다).
+- `useAccessGroups: false`는 `allowFrom`가 설정되지 않은 경우 명령이 액세스 그룹 정책을 우회하도록 허용합니다.
 :::
-
 
 ---
 
@@ -659,7 +652,7 @@ exec ssh -T gateway-host imsg "$@"
 
 구성된 별칭은 항상 기본값보다 우선합니다.
 
-Z.AI GLM-4.x 모델은 `--thinking off`를 설정하거나 `agents.defaults.models["zai/&lt;model&gt;"].params.thinking`를 직접 정의하지 않는 한 자동으로 사고 모드를 활성화합니다.
+Z.AI GLM-4.x 모델은 `--thinking off`를 설정하거나 `agents.defaults.models["zai/<model>"].params.thinking`를 직접 정의하지 않는 한 자동으로 사고 모드를 활성화합니다.
 
 ### `agents.defaults.cliBackends`
 
@@ -770,23 +763,21 @@ LLM으로 보내기 전에 메모리 내 컨텍스트에서 **이전 도구 결�
 }
 ```
 
+:::accordion{title="cache-ttl mode behavior"}
+- `mode: "cache-ttl"`는 가지치기 패스를 활성화합니다.
+- `ttl` 정리가 다시 실행될 수 있는 빈도를 제어합니다(마지막 캐시 터치 후).
+- 가지치기는 먼저 대형 도구 결과를 소프트 트림한 다음 필요한 경우 오래된 도구 결과를 강제 삭제합니다.
 
-::: details cache-ttl mode behavior
-  - `mode: "cache-ttl"`는 가지치기 패스를 활성화합니다.
-  - `ttl` 정리가 다시 실행될 수 있는 빈도를 제어합니다(마지막 캐시 터치 후).
-  - 가지치기는 먼저 대형 도구 결과를 소프트 트림한 다음 필요한 경우 오래된 도구 결과를 강제 삭제합니다.
+**소프트 트림**은 시작 + 끝을 유지하고 중간에 `...`를 삽입합니다.
 
-  **소프트 트림**은 시작 + 끝을 유지하고 중간에 `...`를 삽입합니다.
+**강제 삭제**는 전체 도구 결과를 자리 표시자로 대체합니다.
 
-  **강제 삭제**는 전체 도구 결과를 자리 표시자로 대체합니다.
+참고:
 
-  참고:
-
-  - 이미지 블록은 자르거나 지워지지 않습니다.
-  - 비율은 정확한 토큰 수가 아닌 문자 기반(대략)입니다.
-  - 보조 메시지가 `keepLastAssistants`개 미만일 경우 정리를 건너뜁니다.
+- 이미지 블록은 자르거나 지워지지 않습니다.
+- 비율은 정확한 토큰 수가 아닌 문자 기반(대략)입니다.
+- 보조 메시지가 `keepLastAssistants`개 미만일 경우 정리를 건너뜁니다.
 :::
-
 
 동작에 대한 자세한 내용은 [세션 정리](/concepts/session-pruning)를 참조하세요.
 
@@ -807,7 +798,7 @@ LLM으로 보내기 전에 메모리 내 컨텍스트에서 **이전 도구 결�
 ```
 
 - 텔레그램이 아닌 채널에서는 차단 응답을 활성화하려면 명시적인 `*.blockStreaming: true`가 필요합니다.
-- 채널 재정의: `channels.&lt;channel&gt;.blockStreamingCoalesce` (및 계정별 변형). Signal/Slack/Discord/Google Chat 기본 `minChars: 1500`.
+- 채널 재정의: `channels.<channel>.blockStreamingCoalesce` (및 계정별 변형). Signal/Slack/Discord/Google Chat 기본 `minChars: 1500`.
 - `humanDelay`: 블록 응답 사이의 무작위 일시 중지입니다. `natural` = 800–2500ms. 에이전트별 재정의: `agents.list[].humanDelay`.
 
 동작 + 청킹 세부정보는 [스트리밍](/concepts/streaming)을 참조하세요.
@@ -910,19 +901,18 @@ LLM으로 보내기 전에 메모리 내 컨텍스트에서 **이전 도구 결�
 }
 ```
 
+:::accordion{title="Sandbox details"}
+    **작업 공간 액세스:**
 
-::: details Sandbox details
-  **작업 공간 액세스:**
+    - `none`: `~/.openclaw/sandboxes` 아래 범위별 샌드박스 작업공간
+    - `ro`: `/workspace`의 샌드박스 작업공간, `/agent`에 읽기 전용으로 마운트된 에이전트 작업공간
+    - `rw`: 에이전트 작업 영역이 `/workspace`에 읽기/쓰기가 마운트되었습니다.
 
-  - `none`: `~/.openclaw/sandboxes` 아래 범위별 샌드박스 작업공간
-  - `ro`: `/workspace`의 샌드박스 작업공간, `/agent`에 읽기 전용으로 마운트된 에이전트 작업공간
-  - `rw`: 에이전트 작업 영역이 `/workspace`에 읽기/쓰기가 마운트되었습니다.
+    **범위:**
 
-  **범위:**
-
-  - `session`: 세션별 컨테이너 + 작업공간
-  - `agent`: 에이전트당 컨테이너 1개 + 작업공간(기본값)
-  - `shared`: 공유 컨테이너 및 작업 공간(세션 간 격리 없음)
+    - `session`: 세션별 컨테이너 + 작업공간
+    - `agent`: 에이전트당 컨테이너 1개 + 작업공간(기본값)
+    - `shared`: 공유 컨테이너 및 작업 공간(세션 간 격리 없음)
 
 **`setupCommand`** 컨테이너 생성 후 (`sh -lc`를 통해) 한 번 실행됩니다. 네트워크 송신, 쓰기 가능한 루트, 루트 사용자가 필요합니다.
 
@@ -934,9 +924,8 @@ LLM으로 보내기 전에 메모리 내 컨텍스트에서 **이전 도구 결�
 
 **샌드박스 브라우저** (`sandbox.browser.enabled`): Chromium + CDP가 컨테이너에 포함되어 있습니다. noVNC URL이 시스템 프롬프트에 삽입되었습니다. 기본 구성에는 `browser.enabled`가 필요하지 않습니다.
 
-  - `allowHostControl: false`(기본값)은 샌드박스 세션이 호스트 브라우저를 대상으로 하지 못하도록 차단합니다.
+    - `allowHostControl: false`(기본값)은 샌드박스 세션이 호스트 브라우저를 대상으로 하지 못하도록 차단합니다.
 :::
-
 
 이미지 빌드:
 
@@ -1027,8 +1016,7 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 
 ### 에이전트별 액세스 프로필
 
-
-::: details Full access (no sandbox)
+:::accordion{title="Full access (no sandbox)"}
 ```json5
 {
   agents: {
@@ -1044,8 +1032,7 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 ```
 :::
 
-
-::: details Read-only tools + workspace
+:::accordion{title="Read-only tools + workspace"}
 ```json5
 {
   agents: {
@@ -1072,8 +1059,7 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 ```
 :::
 
-
-::: details No filesystem access (messaging only)
+:::accordion{title="No filesystem access (messaging only)"}
 ```json5
 {
   agents: {
@@ -1117,7 +1103,6 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 ```
 :::
 
-
 우선순위에 대한 자세한 내용은 [다중 에이전트 샌드박스 및 도구](/tools/multi-agent-sandbox-tools)를 참조하세요.
 
 ---
@@ -1160,21 +1145,19 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 }
 ```
 
-
-::: details Session field details
-  - **`dmScope`**: DM을 그룹화하는 방법입니다.
+:::accordion{title="Session field details"}
+- **`dmScope`**: DM을 그룹화하는 방법입니다.
   - `main`: 모든 DM이 기본 세션을 공유합니다.
   - `per-peer`: 채널 전반에 걸쳐 보낸 사람 ID로 격리합니다.
   - `per-channel-peer`: 채널 + 발신자별로 격리합니다(다중 사용자 받은 편지함에 권장).
   - `per-account-channel-peer`: 계정 + 채널 + 발신자별로 격리합니다(다중 계정 권장).
-  - **`identityLinks`**: 교차 채널 세션 공유를 위해 정식 ID를 공급자 접두사가 붙은 피어에 매핑합니다.
-  - **`reset`**: 1차 재설정 정책입니다. `daily`는 `atHour` 현지 시간에 재설정됩니다. `idle`는 `idleMinutes` 이후에 재설정됩니다. 둘 다 구성하면 먼저 만료되는 쪽이 우선합니다.
-  - **`resetByType`**: 유형별 재정의(`direct`, `group`, `thread`). 레거시 `dm`가 `direct`의 별칭으로 허용됩니다.
-  - **`mainKey`**: 레거시 필드. 이제 런타임은 기본 직접 채팅 버킷에 항상 `"main"`를 사용합니다.
-  - **`sendPolicy`**: `channel`, `chatType` (`direct|group|channel`, 레거시 `dm` 별칭) 또는 `keyPrefix`로 일치합니다. 먼저 거부하면 승리합니다.
-  - **`maintenance`**: `warn`는 제거 시 활성 세션에 경고합니다. `enforce` 가지치기 및 회전을 적용합니다.
+- **`identityLinks`**: 교차 채널 세션 공유를 위해 정식 ID를 공급자 접두사가 붙은 피어에 매핑합니다.
+- **`reset`**: 1차 재설정 정책입니다. `daily`는 `atHour` 현지 시간에 재설정됩니다. `idle`는 `idleMinutes` 이후에 재설정됩니다. 둘 다 구성하면 먼저 만료되는 쪽이 우선합니다.
+- **`resetByType`**: 유형별 재정의(`direct`, `group`, `thread`). 레거시 `dm`가 `direct`의 별칭으로 허용됩니다.
+- **`mainKey`**: 레거시 필드. 이제 런타임은 기본 직접 채팅 버킷에 항상 `"main"`를 사용합니다.
+- **`sendPolicy`**: `channel`, `chatType` (`direct|group|channel`, 레거시 `dm` 별칭) 또는 `keyPrefix`로 일치합니다. 먼저 거부하면 승리합니다.
+- **`maintenance`**: `warn`는 제거 시 활성 세션에 경고합니다. `enforce` 가지치기 및 회전을 적용합니다.
 :::
-
 
 ---
 
@@ -1210,7 +1193,7 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 
 ### 응답 접두사
 
-채널별/계정 재정의: `channels.&lt;channel&gt;.responsePrefix`, `channels.&lt;channel&gt;.accounts.&lt;id&gt;.responsePrefix`.
+채널별/계정 재정의: `channels.<channel>.responsePrefix`, `channels.<channel>.accounts.<id>.responsePrefix`.
 
 해결 방법(가장 구체적인 성공): 계정 → 채널 → 글로벌. `""` 캐스케이드를 비활성화하고 중지합니다. `"auto"`는 `[{identity.name}]`를 파생합니다.
 
@@ -1447,7 +1430,7 @@ scripts/sandbox-browser-setup.sh   # optional browser image
         },
         models: [
           { provider: "openai", model: "gpt-4o-mini-transcribe" },
-          { type: "cli", command: "whisper", args: ["--model", "base", "{{MediaPath}}"] },
+          { type: "cli", command: "whisper", args: ["--model", "base", "&#123;&#123;MediaPath&#125;&#125;"] },
         ],
       },
       video: {
@@ -1460,28 +1443,26 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 }
 ```
 
+:::accordion{title="Media model entry fields"}
+**공급자 항목** (`type: "provider"` 또는 생략):
 
-::: details Media model entry fields
-  **공급자 항목** (`type: "provider"` 또는 생략):
+- `provider`: API 제공자 ID (`openai`, `anthropic`, `google`/`gemini`, `groq` 등)
+- `model`: 모델 ID 재정의
+- `profile` / `preferredProfile`: 인증 프로필 선택
 
-  - `provider`: API 제공자 ID (`openai`, `anthropic`, `google`/`gemini`, `groq` 등)
-  - `model`: 모델 ID 재정의
-  - `profile` / `preferredProfile`: 인증 프로필 선택
+**CLI 항목** (`type: "cli"`):
 
-  **CLI 항목** (`type: "cli"`):
+- `command` : 실행 가능한 실행 파일
+- `args`: 템플릿 인수(`&#123;&#123;MediaPath&#125;&#125;`, `&#123;&#123;Prompt&#125;&#125;`, `&#123;&#123;MaxChars&#125;&#125;` 등 지원)
 
-  - `command` : 실행 가능한 실행 파일
-  - `args`: 템플릿 인수(`&#123;&#123;MediaPath&#125;&#125;`, `&#123;&#123;Prompt&#125;&#125;`, `&#123;&#123;MaxChars&#125;&#125;` 등 지원)
+**공통 필드:**
 
-  **공통 필드:**
+- `capabilities`: 선택적 목록(`image`, `audio`, `video`). 기본값: `openai`/`anthropic`/`minimax` → 이미지, `google` → 이미지+오디오+비디오, `groq` → 오디오.
+- `prompt`, `maxChars`, `maxBytes`, `timeoutSeconds`, `language`: 항목별로 재정의됩니다.
+- 실패하면 다음 항목으로 돌아갑니다.
 
-  - `capabilities`: 선택적 목록(`image`, `audio`, `video`). 기본값: `openai`/`anthropic`/`minimax` → 이미지, `google` → 이미지+오디오+비디오, `groq` → 오디오.
-  - `prompt`, `maxChars`, `maxBytes`, `timeoutSeconds`, `language`: 항목별로 재정의됩니다.
-  - 실패하면 다음 항목으로 돌아갑니다.
-
-  공급자 인증은 인증 프로필 → 환경 변수 → `models.providers.*.apiKey`의 표준 순서를 따릅니다.
+공급자 인증은 인증 프로필 → 환경 변수 → `models.providers.*.apiKey`의 표준 순서를 따릅니다.
 :::
-
 
 ### `tools.agentToAgent`
 
@@ -1519,7 +1500,7 @@ scripts/sandbox-browser-setup.sh   # optional browser image
 
 ## 사용자 정의 공급자 및 기본 URL
 
-OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `models.providers` 또는 `~/.openclaw/agents/&lt;agentId&gt;/agent/models.json`를 통해 사용자 정의 공급자를 추가합니다.
+OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `models.providers` 또는 `~/.openclaw/agents/<agentId>/agent/models.json`를 통해 사용자 정의 공급자를 추가합니다.
 
 ```json5
 {
@@ -1552,8 +1533,7 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 
 ### 제공자 예
 
-
-::: details Cerebras (GLM 4.6 / 4.7)
+:::accordion{title="Cerebras (GLM 4.6 / 4.7)"}
 ```json5
 {
   env: { CEREBRAS_API_KEY: "sk-..." },
@@ -1586,12 +1566,10 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
 대뇌에는 `cerebras/zai-glm-4.7`를 사용하세요. `zai/glm-4.7` Z.AI 직접용.
 :::
 
-
-::: details OpenCode Zen
+:::accordion{title="OpenCode Zen"}
 ```json5
 {
   agents: {
@@ -1603,12 +1581,10 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
 `OPENCODE_API_KEY`(또는 `OPENCODE_ZEN_API_KEY`)를 설정합니다. 단축키: `openclaw onboard --auth-choice opencode-zen`.
 :::
 
-
-::: details Z.AI (GLM-4.7)
+:::accordion{title="Z.AI (GLM-4.7)"}
 ```json5
 {
   agents: {
@@ -1620,16 +1596,14 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
 `ZAI_API_KEY`를 설정합니다. `z.ai/*` 및 `z-ai/*`는 허용되는 별칭입니다. 단축키: `openclaw onboard --auth-choice zai-api-key`.
 
-  - 일반 엔드포인트: `https://api.z.ai/api/paas/v4`
-  - 코딩 끝점(기본값): `https://api.z.ai/api/coding/paas/v4`
-  - 일반 엔드포인트의 경우 기본 URL 재정의를 사용하여 사용자 지정 공급자를 정의합니다.
+    - 일반 엔드포인트: `https://api.z.ai/api/paas/v4`
+    - 코딩 끝점(기본값): `https://api.z.ai/api/coding/paas/v4`
+    - 일반 엔드포인트의 경우 기본 URL 재정의를 사용하여 사용자 지정 공급자를 정의합니다.
 :::
 
-
-::: details Moonshot AI (Kimi)
+:::accordion{title="Moonshot AI (Kimi)"}
 ```json5
 {
   env: { MOONSHOT_API_KEY: "sk-..." },
@@ -1663,12 +1637,10 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
 중국 엔드포인트의 경우: `baseUrl: "https://api.moonshot.cn/v1"` 또는 `openclaw onboard --auth-choice moonshot-api-key-cn`.
 :::
 
-
-::: details Kimi Coding
+:::accordion{title="Kimi Coding"}
 ```json5
 {
   env: { KIMI_API_KEY: "sk-..." },
@@ -1681,12 +1653,10 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
 인류와 호환되는 내장형 공급자입니다. 단축키: `openclaw onboard --auth-choice kimi-code-api-key`.
 :::
 
-
-::: details Synthetic (Anthropic-compatible)
+:::accordion{title="Synthetic (Anthropic-compatible)"}
 ```json5
 {
   env: { SYNTHETIC_API_KEY: "sk-..." },
@@ -1720,12 +1690,10 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
 기본 URL은 `/v1`를 생략해야 합니다(Anthropic 클라이언트가 이를 추가합니다). 단축키: `openclaw onboard --auth-choice synthetic-api-key`.
 :::
 
-
-::: details MiniMax M2.1 (direct)
+:::accordion{title="MiniMax M2.1 (direct)"}
 ```json5
 {
   agents: {
@@ -1760,15 +1728,12 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
 `MINIMAX_API_KEY`를 설정합니다. 단축키: `openclaw onboard --auth-choice minimax-api`.
 :::
 
-
-::: details Local models (LM Studio)
+:::accordion{title="Local models (LM Studio)"}
 [로컬 모델](/gateway/local-models)을 참조하세요. 핵심요약: 심각한 하드웨어에서 LM Studio Responses API를 통해 MiniMax M2.1을 실행하세요. 대체를 위해 호스팅된 모델을 병합된 상태로 유지합니다.
 :::
-
 
 ---
 
@@ -1798,8 +1763,8 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 ```
 
 - `allowBundled`: 번들 기술에 대해서만 선택적 허용 목록입니다(관리/작업 공간 기술은 영향을 받지 않음).
-- `entries.&lt;skillKey&gt;.enabled: false`는 번들/설치되어 있어도 스킬을 비활성화합니다.
-- `entries.&lt;skillKey&gt;.apiKey`: 기본 환경 변수를 선언하는 스킬의 편의성입니다.
+- `entries.<skillKey>.enabled: false`는 번들/설치되어 있어도 스킬을 비활성화합니다.
+- `entries.<skillKey>.apiKey`: 기본 환경 변수를 선언하는 스킬의 편의성입니다.
 
 ---
 
@@ -1824,7 +1789,7 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-- `~/.openclaw/extensions`, `&lt;workspace&gt;/.openclaw/extensions` 및 `plugins.load.paths`에서 로드됩니다.
+- `~/.openclaw/extensions`, `<workspace>/.openclaw/extensions` 및 `plugins.load.paths`에서 로드됩니다.
 - **구성을 변경하려면 게이트웨이를 다시 시작해야 합니다.**
 - `allow`: 선택적 허용 목록(목록에 있는 플러그인만 로드). `deny`가 승리합니다.
 
@@ -1916,19 +1881,17 @@ OpenClaw는 pi-coding-agent 모델 카탈로그를 사용합니다. 구성의 `m
 }
 ```
 
-
-::: details Gateway field details
-  - `mode`: `local` (게이트웨이 실행) 또는 `remote` (원격 게이트웨이에 연결). `local`이 아니면 게이트웨이가 시작을 거부합니다.
-  - `port`: WS + HTTP용 단일 다중화 포트입니다. 우선순위: `--port` > `OPENCLAW_GATEWAY_PORT` > `gateway.port` > `18789`.
-  - `bind`: `auto`, `loopback` (기본값), `lan` (`0.0.0.0`), `tailnet` (Tailscale IP 전용) 또는 `custom`.
-  - **인증**: 기본적으로 필요합니다. 비루프백 바인딩에는 공유 토큰/비밀번호가 필요합니다. 온보딩 마법사는 기본적으로 토큰을 생성합니다.
-  - `auth.allowTailscale`: `true`일 때 Tailscale Serve ID 헤더가 인증을 충족합니다(`tailscale whois`를 통해 확인됨). `tailscale.mode = "serve"`일 때 기본값은 `true`입니다.
-  - `tailscale.mode`: `serve`(테일넷 전용, 루프백 바인드) 또는 `funnel`(공개, 인증 필요).
-  - `remote.transport`: `ssh` (기본값) 또는 `direct` (ws/wss). `direct`의 경우 `remote.url`는 `ws://` 또는 `wss://`여야 합니다.
-  - `gateway.remote.token`는 원격 CLI 호출 전용입니다. 로컬 게이트웨이 인증을 활성화하지 않습니다.
-  - `trustedProxies` : TLS를 종료하는 역방향 프록시 IP. 귀하가 제어하는 ​​프록시만 나열하십시오.
+:::accordion{title="Gateway field details"}
+- `mode`: `local` (게이트웨이 실행) 또는 `remote` (원격 게이트웨이에 연결). `local`이 아니면 게이트웨이가 시작을 거부합니다.
+- `port`: WS + HTTP용 단일 다중화 포트입니다. 우선순위: `--port` > `OPENCLAW_GATEWAY_PORT` > `gateway.port` > `18789`.
+- `bind`: `auto`, `loopback` (기본값), `lan` (`0.0.0.0`), `tailnet` (Tailscale IP 전용) 또는 `custom`.
+- **인증**: 기본적으로 필요합니다. 비루프백 바인딩에는 공유 토큰/비밀번호가 필요합니다. 온보딩 마법사는 기본적으로 토큰을 생성합니다.
+- `auth.allowTailscale`: `true`일 때 Tailscale Serve ID 헤더가 인증을 충족합니다(`tailscale whois`를 통해 확인됨). `tailscale.mode = "serve"`일 때 기본값은 `true`입니다.
+- `tailscale.mode`: `serve`(테일넷 전용, 루프백 바인드) 또는 `funnel`(공개, 인증 필요).
+- `remote.transport`: `ssh` (기본값) 또는 `direct` (ws/wss). `direct`의 경우 `remote.url`는 `ws://` 또는 `wss://`여야 합니다.
+- `gateway.remote.token`는 원격 CLI 호출 전용입니다. 로컬 게이트웨이 인증을 활성화하지 않습니다.
+- `trustedProxies` : TLS를 종료하는 역방향 프록시 IP. 귀하가 제어하는 ​​프록시만 나열하십시오.
 :::
-
 
 ### OpenAI 호환 엔드포인트
 
@@ -1949,7 +1912,7 @@ OPENCLAW_STATE_DIR=~/.openclaw-a \
 openclaw gateway --port 19001
 ```
 
-편의 플래그: `--dev` (`~/.openclaw-dev` + 포트 `19001` 사용), `--profile &lt;name&gt;` (`~/.openclaw-&lt;name&gt;` 사용))
+편의 플래그: `--dev` (`~/.openclaw-dev` + 포트 `19001` 사용), `--profile <name>` (`~/.openclaw-<name>` 사용))
 
 [다중 게이트웨이](/gateway/multiple-gateways)를 참조하세요.
 
@@ -1977,8 +1940,8 @@ openclaw gateway --port 19001
         agentId: "hooks",
         wakeMode: "now",
         name: "Gmail",
-        sessionKey: "hook:gmail:{{messages[0].id}}",
-        messageTemplate: "From: {{messages[0].from}}\nSubject: {{messages[0].subject}}\n{{messages[0].snippet}}",
+        sessionKey: "hook:gmail:&#123;&#123;messages[0].id&#125;&#125;",
+        messageTemplate: "From: &#123;&#123;messages[0].from&#125;&#125;\nSubject: &#123;&#123;messages[0].subject&#125;&#125;\n&#123;&#123;messages[0].snippet&#125;&#125;",
         deliver: true,
         channel: "last",
         model: "openai/gpt-5.2-mini",
@@ -1988,30 +1951,28 @@ openclaw gateway --port 19001
 }
 ```
 
-인증: `Authorization: Bearer &lt;token&gt;` 또는 `x-openclaw-token: &lt;token&gt;`.
+인증: `Authorization: Bearer <token>` 또는 `x-openclaw-token: <token>`.
 
 **엔드포인트:**
 
 - `POST /hooks/wake` → `{ text, mode?: "now"|"next-heartbeat" }`
 - `POST /hooks/agent` → `{ message, name?, agentId?, sessionKey?, wakeMode?, deliver?, channel?, to?, model?, thinking?, timeoutSeconds? }`
   - 요청 페이로드의 `sessionKey`는 `hooks.allowRequestSessionKey=true`인 경우에만 허용됩니다(기본값: `false`).
-- `POST /hooks/&lt;name&gt;` → `hooks.mappings`를 통해 해결됨
+- `POST /hooks/<name>` → `hooks.mappings`를 통해 해결됨
 
-
-::: details Mapping details
-  - `match.path`는 `/hooks` 뒤의 하위 경로와 일치합니다(예: `/hooks/gmail` → `gmail`).
-  - `match.source`는 일반 경로의 페이로드 필드와 일치합니다.
-  - `&#123;&#123;messages[0].subject&#125;&#125;`와 같은 템플릿은 페이로드에서 읽습니다.
-  - `transform`는 후크 작업을 반환하는 JS/TS 모듈을 가리킬 수 있습니다.
-  - `agentId`는 특정 에이전트에게 라우팅됩니다. 알 수 없는 ID는 기본값으로 돌아갑니다.
-  - `allowedAgentIds`: 명시적 라우팅을 제한합니다(`*` 또는 생략 = 모두 허용, `[]` = 모두 거부).
-  - `defaultSessionKey`: 후크 에이전트에 대한 선택적 고정 세션 키가 명시적인 `sessionKey` 없이 실행됩니다.
-  - `allowRequestSessionKey`: `/hooks/agent` 호출자가 `sessionKey`를 설정하도록 허용합니다(기본값: `false`).
-  - `allowedSessionKeyPrefixes`: 명시적인 `sessionKey` 값(요청 + 매핑)에 대한 선택적 접두사 허용 목록입니다. `["hook:"]`.
-  - `deliver: true`는 채널에 최종 응답을 보냅니다. `channel`의 기본값은 `last`입니다.
-  - `model`는 이 후크 실행에 대한 LLM을 재정의합니다(모델 카탈로그가 설정된 경우 허용되어야 함).
+:::accordion{title="Mapping details"}
+- `match.path`는 `/hooks` 뒤의 하위 경로와 일치합니다(예: `/hooks/gmail` → `gmail`).
+- `match.source`는 일반 경로의 페이로드 필드와 일치합니다.
+- `&#123;&#123;messages[0].subject&#125;&#125;`와 같은 템플릿은 페이로드에서 읽습니다.
+- `transform`는 후크 작업을 반환하는 JS/TS 모듈을 가리킬 수 있습니다.
+- `agentId`는 특정 에이전트에게 라우팅됩니다. 알 수 없는 ID는 기본값으로 돌아갑니다.
+- `allowedAgentIds`: 명시적 라우팅을 제한합니다(`*` 또는 생략 = 모두 허용, `[]` = 모두 거부).
+- `defaultSessionKey`: 후크 에이전트에 대한 선택적 고정 세션 키가 명시적인 `sessionKey` 없이 실행됩니다.
+- `allowRequestSessionKey`: `/hooks/agent` 호출자가 `sessionKey`를 설정하도록 허용합니다(기본값: `false`).
+- `allowedSessionKeyPrefixes`: 명시적인 `sessionKey` 값(요청 + 매핑)에 대한 선택적 접두사 허용 목록입니다. `["hook:"]`.
+- `deliver: true`는 채널에 최종 응답을 보냅니다. `channel`의 기본값은 `last`입니다.
+- `model`는 이 후크 실행에 대한 LLM을 재정의합니다(모델 카탈로그가 설정된 경우 허용되어야 함).
 :::
-
 
 ### Gmail 통합
 
@@ -2135,7 +2096,7 @@ openclaw gateway --port 19001
 
 - 대문자만 일치합니다: `[A-Z_][A-Z0-9_]*`.
 - 구성 로드 시 누락/빈 변수가 오류를 발생시킵니다.
-- 리터럴 `${VAR}`에 대해 `${VAR}`로 탈출합니다.
+- 리터럴 `${VAR}`에 대해 `$${VAR}`로 탈출합니다.
 - `$include`와 함께 작동합니다.
 
 ---
@@ -2156,7 +2117,7 @@ openclaw gateway --port 19001
 }
 ```
 
-- 에이전트별 인증 프로필은 `&lt;agentDir&gt;/auth-profiles.json`에 저장됩니다.
+- 에이전트별 인증 프로필은 `<agentDir>/auth-profiles.json`에 저장됩니다.
 - 레거시 OAuth는 `~/.openclaw/credentials/oauth.json`에서 가져옵니다.
 - [OAuth](/concepts/oauth)를 참조하세요.
 
@@ -2233,8 +2194,7 @@ macOS 온보딩 어시스턴트가 작성했습니다. 기본값 파생:
 
 현재 빌드에는 더 이상 TCP 브리지가 포함되지 않습니다. 노드는 Gateway WebSocket을 통해 연결됩니다. `bridge.*` 키는 더 이상 구성 스키마의 일부가 아닙니다(제거될 때까지 검증이 실패합니다. `openclaw doctor --fix`는 알 수 없는 키를 제거할 수 있습니다).
 
-
-::: details Legacy bridge config (historical reference)
+:::accordion{title="Legacy bridge config (historical reference)"}
 ```json
 {
   "bridge": {
@@ -2249,7 +2209,6 @@ macOS 온보딩 어시스턴트가 작성했습니다. 기본값 파생:
 }
 ```
 :::
-
 
 ---
 

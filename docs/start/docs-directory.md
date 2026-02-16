@@ -1,16 +1,18 @@
 ---
 title: "Docs directory"
 ---
+
 ::: info
+
 이 페이지는 선별된 색인입니다. 처음이라면 [시작하기](/start/getting-started)부터 시작하세요.
 문서의 전체 지도는 ​​[문서 허브](/start/hubs)를 참조하세요.
-:::
 
+:::
 
 ## 여기서 시작하세요
 
 - [문서 허브(모든 페이지가 연결됨)](/start/hubs)
-- [도움말](/help/)
+- [도움말](/help)
 - [구성](/gateway/configuration)
 - [구성예](/gateway/configuration-examples)
 - [슬래시 명령](/tools/slash-commands)
@@ -21,11 +23,11 @@ title: "Docs directory"
 - [OpenClaw 보조 설정](/start/openclaw)
 - [스킬](/tools/skills)
 - [스킬 구성](/tools/skills-config)
-- [작업공간 템플릿](/reference/AGENTS.default)
+- [작업공간 템플릿](/reference/templates/AGENTS)
 - [RPC 어댑터](/reference/rpc)
-- [게이트웨이 런북](/gateway/)
-- [노드(iOS 및 Android)](/nodes/)
-- [웹 표면(제어 UI)](/web/)
+- [게이트웨이 런북](/gateway)
+- [노드(iOS 및 Android)](/nodes)
+- [웹 표면(제어 UI)](/web)
 - [발견 및 수송](/gateway/discovery)
 - [원격 접속](/gateway/remote)
 
@@ -57,5 +59,5 @@ title: "Docs directory"
 - [크론 작업](/automation/cron-jobs)
 - [웹훅](/automation/webhook)
 - [Gmail 후크(Pub/Sub)](/automation/gmail-pubsub)
-- [보안](/gateway/security/)
+- [보안](/gateway/security)
 - [문제 해결](/gateway/troubleshooting)

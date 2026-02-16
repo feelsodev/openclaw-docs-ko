@@ -1,14 +1,15 @@
 ---
 title: "Setup"
 ---
+
 # 설정
 
-
 ::: info
+
 처음 설정하는 경우 [시작하기](/start/getting-started)부터 시작하세요.
 마법사에 대한 자세한 내용은 [온보딩 마법사](/start/wizard)를 참조하세요.
-:::
 
+:::
 
 최종 업데이트 날짜: 2026-01-01
 
@@ -20,7 +21,7 @@ title: "Setup"
 
 ## 전제조건(소스에서)
 
-- 노드 `&gt;=22`
+- 노드 `>=22`
 - `pnpm`
 - Docker(선택 사항, 컨테이너화된 설정/e2e에만 해당 - [Docker](/install/docker) 참조)
 
@@ -116,21 +117,21 @@ openclaw health
 - **잘못된 포트:** Gateway WS의 기본값은 `ws://127.0.0.1:18789`입니다. 앱 + CLI를 동일한 포트에 유지하세요.
 - **주 거주지:**
   - 자격 증명: `~/.openclaw/credentials/`
-  - 세션: `~/.openclaw/agents/&lt;agentId&gt;/sessions/`
+  - 세션: `~/.openclaw/agents/<agentId>/sessions/`
   - 로그: `/tmp/openclaw/`
 
 ## 자격 증명 저장소 맵
 
 인증을 디버깅하거나 백업할 항목을 결정할 때 다음을 사용하세요.
 
-- **WhatsApp**: `~/.openclaw/credentials/whatsapp/&lt;accountId&gt;/creds.json`
+- **WhatsApp**: `~/.openclaw/credentials/whatsapp/<accountId>/creds.json`
 - **텔레그램 봇 토큰**: config/env 또는 `channels.telegram.tokenFile`
 - **Discord 봇 토큰**: config/env (토큰 파일은 아직 지원되지 않음)
 - **Slack 토큰**: config/env (`channels.slack.*`)
-- **페어링 허용 목록**: `~/.openclaw/credentials/&lt;channel&gt;-allowFrom.json`
-- **모델 인증 프로필**: `~/.openclaw/agents/&lt;agentId&gt;/agent/auth-profiles.json`
+- **페어링 허용 목록**: `~/.openclaw/credentials/<channel>-allowFrom.json`
+- **모델 인증 프로필**: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
 - **레거시 OAuth 가져오기**: `~/.openclaw/credentials/oauth.json`
-  자세한 내용: [보안](/gateway/security/#credential-storage-map).
+  자세한 내용: [보안](/gateway/security#credential-storage-map).
 
 ## 업데이트 중(설정을 망치지 않고)
 
@@ -148,11 +149,11 @@ sudo loginctl enable-linger $USER
 ```
 
 상시 가동 또는 다중 사용자 서버의 경우에는 **시스템** 서비스를 고려하세요.
-사용자 서비스(지체 필요 없음). 시스템 노트는 [게이트웨이 런북](/gateway/)을 참조하세요.
+사용자 서비스(지체 필요 없음). 시스템 노트는 [게이트웨이 런북](/gateway)을 참조하세요.
 
 ## 관련 문서
 
-- [Gateway Runbook](/gateway/) (플래그, 감독, 포트)
+- [Gateway Runbook](/gateway) (플래그, 감독, 포트)
 - [게이트웨이 구성](/gateway/configuration) (구성 스키마 + 예시)
 - [Discord](/channels/discord) 및 [텔레그램](/channels/telegram) (답글 태그 + replyToMode 설정)
 - [OpenClaw 보조 설정](/start/openclaw)
