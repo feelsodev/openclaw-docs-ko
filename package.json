@@ -7,7 +7,10 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "preview": "vitepress preview docs",
+    "check:home": "node scripts/check-homepage.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:qa": "npm run check:home && npm run check:links"
   },
   "devDependencies": {
     "markdown-it": "^14.1.1",

@@ -110,7 +110,7 @@ openclaw gateway --port 18789
 - 원격 접속: [웹 표면](/web) 및 [Tailscale](/gateway/tailscale)
 
 <p align="center">
-  <img src="https://docs.openclaw.ai/assets/whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
+  <img src="/assets/openclaw-logo-text-dark.png" alt="OpenClaw" width="420" />
 </p>
 
 ## 구성(선택 사항)
