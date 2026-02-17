@@ -1,7 +1,8 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { installMintContainers } from './theme/markdown-tabs'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'OpenClaw 한국어 문서',
   description: 'OpenClaw 비공식 한국어 문서 - AI 개인 비서 게이트웨이',
   lang: 'ko-KR',
@@ -557,4 +558,10 @@ export default defineConfig({
   },
 
   base: '/openclaw-docs-ko/',
-})
+
+  mermaid: {},
+
+  mermaidPlugin: {
+    class: 'mermaid',
+  },
+}))
