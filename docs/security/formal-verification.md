@@ -21,7 +21,7 @@ permalink: /security/formal-verification/
 
 ## 모델들이 사는 곳
 
-모델은 별도의 저장소인 [vignesh07/openclaw-formal-models](https://github.com/vignesh07/openclaw-formal-models)에 유지됩니다.
+모델은 별도의 저장소인 [vignesh07/clawdbot-formal-models](https://github.com/vignesh07/clawdbot-formal-models)에 유지됩니다.
 
 ## 중요 주의사항
 
@@ -39,8 +39,8 @@ permalink: /security/formal-verification/
 시작하기:
 
 ```bash
-git clone https://github.com/vignesh07/openclaw-formal-models
-cd openclaw-formal-models
+git clone https://github.com/vignesh07/clawdbot-formal-models
+cd clawdbot-formal-models
 
 # Java 11+ required (TLC runs on the JVM).
 # The repo vendors a pinned `tla2tools.jar` (TLA+ tools) and provides `bin/tlc` + Make targets.

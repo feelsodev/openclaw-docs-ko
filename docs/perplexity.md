@@ -10,7 +10,7 @@ Perplexity의 직접 API 또는 OpenRouter를 통해.
 
 ### 당혹감(직접)
 
-- 기본 URL: [https://api.perplexity.ai](https://api.perplexity.ai)
+- 기본 URL: `https://api.perplexity.ai`
 - 환경변수 : `PERPLEXITY_API_KEY`
 
 ### OpenRouter(대체)
@@ -72,4 +72,4 @@ Perplexity의 직접 API 또는 OpenRouter를 통해.
 - `perplexity/sonar-pro` (기본값) — 다단계 추론 + 웹 검색
 - `perplexity/sonar-reasoning-pro` — 심층 연구
 
-전체 web_search 구성은 [웹 도구](/tools/web/)를 참조하세요.
+전체 web_search 구성은 [웹 도구](/tools/web)를 참조하세요.

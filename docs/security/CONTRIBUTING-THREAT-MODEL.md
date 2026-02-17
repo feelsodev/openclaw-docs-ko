@@ -75,8 +75,8 @@ OpenClaw를 더욱 안전하게 만드는 데 도움을 주셔서 감사합니�
 ## 리소스
 
 - [ATLAS 웹사이트](https://atlas.mitre.org/)
-- [ATLAS 기술](https://atlas.mitre.org/techniques/)
-- [ATLAS 사례 연구](https://atlas.mitre.org/studies/)
+- [ATLAS 기술](https://atlas.mitre.org/)
+- [ATLAS 사례 연구](https://atlas.mitre.org/)
 - [OpenClaw 위협 모델](./THREAT-MODEL-ATLAS.md)
 
 ## 연락처

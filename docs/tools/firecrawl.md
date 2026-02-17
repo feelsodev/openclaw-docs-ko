@@ -52,4 +52,4 @@ OpenClaw는 Firecrawl 요청에 항상 `proxy: "auto"`와 `storeInCache: true`�
 2. Firecrawl(구성된 경우)
 3. 기본 HTML 정리(마지막 대체)
 
-전체 웹 도구 설정은 [웹 도구](/tools/web/)를 참조하세요.
+전체 웹 도구 설정은 [웹 도구](/tools/web)를 참조하세요.

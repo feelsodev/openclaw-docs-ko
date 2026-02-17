@@ -8,8 +8,8 @@ title: "VPS Hosting"
 
 ## 제공업체 선택
 
-- **철도**(원클릭 + 브라우저 설정): [철도](/vps/)
-- **북측면**(원클릭 + 브라우저 설정): [북측면](/vps/)
+- **철도**(원클릭 + 브라우저 설정): [철도](/vps)
+- **북측면**(원클릭 + 브라우저 설정): [북측면](/vps)
 - **Oracle Cloud(항상 무료)**: [Oracle](/platforms/oracle) — $0/월(항상 무료, ARM; 용량/가입이 까다로울 수 있음)
 - **Fly.io**: [Fly.io](/install/fly)
 - **헤츠너(Docker)**: [헤츠너](/install/hetzner)
@@ -35,4 +35,4 @@ title: "VPS Hosting"
 (맥/iOS/안드로이드/헤드리스). 노드는 로컬 화면/카메라/캔버스 및 `system.run`를 제공합니다.
 게이트웨이가 클라우드에 머무르는 동안 다양한 기능을 사용할 수 있습니다.
 
-문서: [노드](/nodes/), [노드 CLI](/cli/nodes/)
+문서: [노드](/nodes/), [노드 CLI](/cli/nodes)

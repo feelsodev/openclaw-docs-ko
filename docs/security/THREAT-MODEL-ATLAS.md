@@ -13,11 +13,11 @@
 
 **주요 ATLAS 리소스:**
 
-- [ATLAS 기술](https://atlas.mitre.org/techniques/)
-- [ATLAS 전술](https://atlas.mitre.org/tactics/)
-- [ATLAS 사례 연구](https://atlas.mitre.org/studies/)
+- [ATLAS 기술](https://atlas.mitre.org/)
+- [ATLAS 전술](https://atlas.mitre.org/)
+- [ATLAS 사례 연구](https://atlas.mitre.org/)
 - [ATLAS GitHub](https://github.com/mitre-atlas/atlas-data)
-- [ATLAS에 기여](https://atlas.mitre.org/resources/contribute)
+- [ATLAS에 기여](https://atlas.mitre.org/)
 
 ### 이 위협 모델에 기여
 

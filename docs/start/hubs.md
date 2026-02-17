@@ -169,7 +169,7 @@ OpenClaw를 처음 사용하는 경우 [시작하기](/start/getting-started)부
 - [ClawHub](/tools/clawhub)
 - [스킬 구성](/tools/skills-config)
 - [기본 에이전트](/reference/AGENTS.default)
-- [템플릿: AGENTS](/reference/templates/AGENTS)
+- [템플릿: AGENTS](/reference/templates/AGENTS.dev)
 - [템플릿: BOOTSTRAP](/reference/templates/BOOTSTRAP)
 - [템플릿: HEARTBEAT](/reference/templates/HEARTBEAT)
 - [템플릿: IDENTITY](/reference/templates/IDENTITY)

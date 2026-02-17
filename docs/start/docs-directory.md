@@ -23,7 +23,7 @@ title: "Docs directory"
 - [OpenClaw 보조 설정](/start/openclaw)
 - [스킬](/tools/skills)
 - [스킬 구성](/tools/skills-config)
-- [작업공간 템플릿](/reference/templates/AGENTS)
+- [작업공간 템플릿](/reference/templates/AGENTS.dev)
 - [RPC 어댑터](/reference/rpc)
 - [게이트웨이 런북](/gateway)
 - [노드(iOS 및 Android)](/nodes)

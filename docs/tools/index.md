@@ -232,7 +232,7 @@ Brave Search API를 사용하여 웹을 검색하세요.
 - Brave API 키가 필요합니다(권장: `openclaw configure --section web` 또는 `BRAVE_API_KEY` 설정).
 - `tools.web.search.enabled`를 통해 활성화합니다.
 - 응답이 캐시됩니다(기본값 15분).
-- 설정 방법은 [웹 도구](/tools/web/)를 참조하세요.
+- 설정 방법은 [웹 도구](/tools/web)를 참조하세요.
 
 ### `web_fetch`
 
@@ -250,7 +250,7 @@ URL(HTML → markdown/text)에서 읽을 수 있는 콘텐츠를 가져오고 �
 - `maxChars`는 `tools.web.fetch.maxCharsCap`에 의해 고정됩니다(기본값 50000).
 - 응답이 캐시됩니다(기본값 15분).
 - JS가 많은 사이트의 경우 브라우저 도구를 선호합니다.
-- 설정 방법은 [웹 도구](/tools/web/)를 참조하세요.
+- 설정 방법은 [웹 도구](/tools/web)를 참조하세요.
 - 선택적 안티 봇 폴백에 대해서는 [Firecrawl](/tools/firecrawl)을 참조하세요.
 
 ### `browser`

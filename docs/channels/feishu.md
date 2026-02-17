@@ -68,9 +68,9 @@ openclaw channels add
 
 ### 1. Feishu 오픈 플랫폼을 오픈하세요
 
-[Feishu 오픈 플랫폼](https://open.feishu.cn/app)을 방문하여 로그인하세요.
+[Feishu 오픈 플랫폼](https://www.feishu.cn/)을 방문하여 로그인하세요.
 
-Lark(글로벌) 테넌트는 [https://open.larksuite.com/app](https://open.larksuite.com/app)을 사용하고 Feishu 구성에서 `domain: "lark"`를 설정해야 합니다.
+Lark(글로벌) 테넌트는 [https://www.larksuite.com/en_sg/](https://www.larksuite.com/en_sg/)를 사용하고 Feishu 구성에서 `domain: "lark"`를 설정해야 합니다.
 
 ### 2. 앱 만들기
 

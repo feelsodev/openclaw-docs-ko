@@ -17,13 +17,13 @@ repo 루트에서 `pnpm` (노드 22+)를 사용합니다. 태그를 지정/게�
 
 - [ ] 범프 `package.json` 버전(예: `2026.1.29`).
 - [ ] `pnpm plugins:sync`를 실행하여 확장 패키지 버전과 변경 로그를 정렬합니다.
-- [ ] CLI/버전 문자열: [`src/cli/program.ts`](https://github.com/openclaw/openclaw/blob/main/src/cli/program.ts) 및 [`src/provider-web.ts`](https://github.com/openclaw/openclaw/blob/main/src/provider-web.ts)의 Baileys 사용자 에이전트를 업데이트합니다.
+- [ ] CLI/버전 문자열: [`src/cli/program.ts`](https://github.com/openclaw/openclaw/blob/main/src/cli/program.ts) 및 [`provider-web 검색`](https://github.com/search?q=repo%3Aopenclaw%2Fopenclaw+provider-web&type=code)의 Baileys 사용자 에이전트를 업데이트합니다.
 - [ ] 패키지 메타데이터(이름, 설명, 저장소, 키워드, 라이선스)와 `bin` 맵이 `openclaw`에 대한 [`openclaw.mjs`](https://github.com/openclaw/openclaw/blob/main/openclaw.mjs)를 가리키는지 확인합니다.
 - [ ] 종속성이 변경된 경우 `pnpm install`를 실행하여 `pnpm-lock.yaml`가 현재 버전이 되도록 합니다.
 
 2. **빌드 및 아티팩트**
 
-- [ ] A2UI 입력이 변경된 경우 `pnpm canvas:a2ui:bundle`를 실행하고 업데이트된 모든 [`src/canvas-host/a2ui/a2ui.bundle.js`](https://github.com/openclaw/openclaw/blob/main/src/canvas-host/a2ui/a2ui.bundle.js)를 커밋합니다.
+- [ ] A2UI 입력이 변경된 경우 `pnpm canvas:a2ui:bundle`를 실행하고 업데이트된 모든 [`a2ui.bundle.js 검색`](https://github.com/search?q=repo%3Aopenclaw%2Fopenclaw+a2ui.bundle.js&type=code)를 커밋합니다.
 - [ ] `pnpm run build` (`dist/`를 재생성함).
 - [ ] npm 패키지 `files`에 필요한 모든 `dist/*` 폴더(특히 헤드리스 노드 + ACP CLI의 경우 `dist/node-host/**` 및 `dist/acp/**`)가 포함되어 있는지 확인합니다.
 - [ ] `dist/build-info.json`가 존재하고 예상되는 `commit` 해시가 포함되어 있는지 확인합니다(CLI 배너는 npm 설치에 이것을 사용합니다).

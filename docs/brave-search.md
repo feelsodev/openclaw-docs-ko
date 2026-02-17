@@ -33,4 +33,4 @@ OpenClaw는 Brave Search를 `web_search`의 기본 공급자로 사용합니다.
 - AI 계획용 데이터는 `web_search`와 **호환되지 않습니다**.
 - Brave는 무료 등급과 유료 요금제를 제공합니다. 현재 한도는 Brave API 포털에서 확인하세요.
 
-전체 web_search 구성은 [웹 도구](/tools/web/)를 참조하세요.
+전체 web_search 구성은 [웹 도구](/tools/web)를 참조하세요.

@@ -276,7 +276,7 @@ Swift 생성기는 다음을 방출합니다.
 생성된 JSON 스키마는 `dist/protocol.schema.json` 저장소에 있습니다. 는
 게시된 원시 파일은 일반적으로 다음 위치에서 구할 수 있습니다.
 
-- [https://raw.githubusercontent.com/openclaw/openclaw/main/dist/protocol.schema.json](https://raw.githubusercontent.com/openclaw/openclaw/main/dist/protocol.schema.json)
+- [https://github.com/openclaw/openclaw/blob/main/src/gateway/protocol/schema.ts](https://github.com/openclaw/openclaw/blob/main/src/gateway/protocol/schema.ts)
 
 ## 스키마를 변경할 때
 

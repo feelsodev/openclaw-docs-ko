@@ -623,7 +623,7 @@ Control UI(또는 Tailscale/SSH)를 통해 노트북/휴대폰에서. 귀하의 
 클라우드의 게이트웨이.
 
 허브: [플랫폼](/platforms/). 원격 접속: [게이트웨이 원격](/gateway/remote).
-노드: [노드](/nodes/), [노드 CLI](/cli/nodes/).
+노드: [노드](/nodes/), [노드 CLI](/cli/nodes).
 
 ### OpenClaw에 자동 업데이트를 요청할 수 있나요?
 
@@ -780,7 +780,7 @@ Always-On 호스트로 하나 구입하면 작은 VPS, 홈 서버 또는 Raspber
 - MacBook Pro는 macOS 앱 또는 노드 호스트를 실행하고 게이트웨이와 쌍을 이룹니다.
 - `openclaw nodes status` / `openclaw nodes list`를 사용하여 확인하세요.
 
-문서: [노드](/nodes/), [노드 CLI](/cli/nodes/).
+문서: [노드](/nodes/), [노드 CLI](/cli/nodes).
 
 ### 번을 사용할 수 있나요?
 
@@ -1422,7 +1422,7 @@ $OPENCLAW_CONFIG_PATH
 - `web_fetch`는 기본적으로 활성화됩니다(명시적으로 비활성화하지 않는 한).
 - 데몬은 `~/.openclaw/.env`(또는 서비스 환경)에서 환경 변수를 읽습니다.
 
-문서: [웹 도구](/tools/web/).
+문서: [웹 도구](/tools/web).
 
 ### 여러 기기에 걸쳐 전문 작업자가 있는 중앙 게이트웨이를 어떻게 운영하나요?
 
@@ -1567,7 +1567,7 @@ openclaw agent --message "Hello from local bot" --deliver --channel telegram --r
 임시 셸 액세스에는 SSH가 적합하지만 진행 중인 에이전트 워크플로 및 작업에는 노드가 더 간단합니다.
 장치 자동화.
 
-문서: [노드](/nodes/), [노드 CLI](/cli/nodes/), [Chrome 확장 프로그램](/tools/chrome-extension).
+문서: [노드](/nodes/), [노드 CLI](/cli/nodes), [Chrome 확장 프로그램](/tools/chrome-extension).
 
 ### 두 번째 노트북에 설치해야 할까요, 아니면 노드만 추가해야 할까요?
 
@@ -1577,7 +1577,7 @@ openclaw agent --message "Hello from local bot" --deliver --channel telegram --r
 
 **강력한 격리**가 필요한 경우에만 두 번째 게이트웨이를 설치하거나 완전히 분리된 두 개의 봇을 설치하세요.
 
-문서: [노드](/nodes/), [노드 CLI](/cli/nodes/), [다중 게이트웨이](/gateway/multiple-gateways).
+문서: [노드](/nodes/), [노드 CLI](/cli/nodes), [다중 게이트웨이](/gateway/multiple-gateways).
 
 ### 노드가 게이트웨이 서비스를 실행합니까?
 
@@ -2852,4 +2852,4 @@ Telegram으로 전송하는 경우 명시적으로 허용하지 않는 한 Disco
 
 ---
 
-아직도 붙어있나요? [Discord](https://discord.com/invite/clawd)에 질문하거나 [GitHub 토론](https://github.com/openclaw/openclaw/discussions)을 열어보세요.
+아직도 붙어있나요? [Discord](https://discord.com/invite/clawd)에 질문하거나 [GitHub Issues](https://github.com/openclaw/openclaw/issues)를 열어보세요.
