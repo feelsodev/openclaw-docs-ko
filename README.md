@@ -1,63 +1,63 @@
-# OpenClaw 한국어 문서 🦞🇰🇷
+# OpenClaw Korean Docs 🦞🇰🇷
 
-[OpenClaw](https://github.com/openclaw/openclaw) 공식 문서의 **비공식 한국어 번역**입니다.
+This repository is an **unofficial Korean translation** of the [OpenClaw](https://github.com/openclaw/openclaw) official documentation.
 
-📖 **문서 사이트**: https://feelsodev.github.io/openclaw-docs-ko/
+📖 **Docs site**: https://feelsodev.github.io/openclaw-docs-ko/
 
-📖 **공식 영문 문서**: https://docs.openclaw.ai
+📖 **Official English docs**: https://docs.openclaw.ai
 
-## 구조
+## Structure
 
 ```
-docs/                    # VitePress 문서 소스
+docs/                    # VitePress documentation source
 ├── .vitepress/
-│   ├── config.ts        # VitePress 설정 (사이드바, 네비게이션)
-│   └── theme/           # 커스텀 테마 + Mintlify 호환 컴포넌트
-├── start/               # 시작하기
-├── install/             # 설치
-├── channels/            # 채널
-├── concepts/            # 개념
-├── tools/               # 도구
-├── providers/           # 모델 프로바이더
-├── platforms/           # 플랫폼
-├── gateway/             # 게이트웨이
+│   ├── config.ts        # VitePress config (sidebar, navigation)
+│   └── theme/           # Custom theme + Mintlify-compatible components
+├── start/               # Getting started
+├── install/             # Installation
+├── channels/            # Channels
+├── concepts/            # Concepts
+├── tools/               # Tools
+├── providers/           # Model providers
+├── platforms/           # Platforms
+├── gateway/             # Gateway
 └── ...
 .github/workflows/
-├── deploy.yml           # main push → GitHub Pages 배포
-└── sync-upstream.yml    # 12시간마다 upstream 변경 감지 → Issue 생성
+├── deploy.yml           # main push -> GitHub Pages deploy
+└── sync-upstream.yml    # Detect upstream changes every 12h -> create issue
 ```
 
-## 개발
+## Development
 
 ```bash
 npm install
-npm run dev       # 로컬 개발 서버
-npm run build     # 프로덕션 빌드
-npm run preview   # 빌드 결과 미리보기
+npm run dev       # local dev server
+npm run build     # production build
+npm run preview   # preview built output
 ```
 
-## 번역 워크플로우
+## Translation Workflow
 
-1. **자동 감지**: GitHub Actions가 12시간마다 [upstream docs](https://github.com/openclaw/openclaw/tree/main/docs) 변경을 체크합니다
-2. **Issue 생성**: 변경이 감지되면 자동으로 Issue가 생성됩니다 (`upstream-sync` 라벨)
-3. **번역**: Issue에 나열된 파일을 번역합니다
-4. **PR & 배포**: PR을 만들고 merge하면 자동으로 GitHub Pages에 배포됩니다
+1. **Auto-detect**: GitHub Actions checks [upstream docs](https://github.com/openclaw/openclaw/tree/main/docs) changes every 12 hours.
+2. **Issue creation**: If changes are detected, an issue is created automatically (`upstream-sync` label).
+3. **Translation**: Translate the files listed in the issue.
+4. **PR & deploy**: Open and merge a PR, then GitHub Pages deployment runs automatically.
 
-## 기여하기
+## Contributing
 
-번역 기여를 환영합니다!
+Translation contributions are welcome.
 
-1. 이 레포를 fork합니다
-2. 번역할 파일을 수정합니다
-3. PR을 올립니다
+1. Fork this repository.
+2. Edit the files you want to translate.
+3. Open a PR.
 
-### 번역 가이드라인
+### Translation Guidelines
 
-- 기술 용어(API, CLI, Gateway 등)는 영문 그대로 유지
-- 코드 블록 내용은 번역하지 않음
-- 링크 경로는 변경하지 않음 (상대 경로 유지)
-- 자연스러운 한국어 표현 사용
+- Keep technical terms (API, CLI, Gateway, etc.) in English.
+- Do not translate code block contents.
+- Do not change link paths (keep relative paths).
+- Use natural Korean phrasing.
 
-## 라이선스
+## License
 
-원본 OpenClaw 프로젝트는 [MIT 라이선스](https://github.com/openclaw/openclaw/blob/main/LICENSE)로 배포됩니다.
+The original OpenClaw project is distributed under the [MIT License](https://github.com/openclaw/openclaw/blob/main/LICENSE).
